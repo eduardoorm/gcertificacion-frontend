@@ -1,0 +1,903 @@
+{ "preguntas": [{
+"pregunta": "¿Cuál es el país más grande del mundo?",
+"opciones": {
+"a": "Rusia",
+"b": "Estados Unidos",
+"c": "China",
+"d": "Brasil"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la capital de Australia?",
+"opciones": {
+"a": "Sídney",
+"b": "Melbourne",
+"c": "Canberra",
+"d": "Perth"
+},
+"respuesta_correcta": "c"
+},
+{"pregunta": "¿Qué año se firmó la Declaración de Independencia de los Estados Unidos?",
+"opciones": {
+"a": "1776",
+"b": "1789",
+"c": "1804",
+"d": "1812"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el río más largo del mundo?",
+"opciones": {
+"a": "Amazonas",
+"b": "Nilo",
+"c": "Yangtsé",
+"d": "Misisipi"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el metal más abundante en la corteza terrestre?",
+"opciones": {
+"a": "Hierro",
+"b": "Aluminio",
+"c": "Cobre",
+"d": "Plomo"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el animal terrestre más rápido del mundo?",
+"opciones": {
+"a": "Guepardo",
+"b": "León",
+"c": "Antílope",
+"d": "Hiena"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué país se encuentra la Torre Eiffel?",
+"opciones": {
+"a": "Francia",
+"b": "Italia",
+"c": "España",
+"d": "Reino Unido"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el planeta más cercano al Sol?",
+"opciones": {
+"a": "Mercurio",
+"b": "Venus",
+"c": "Marte",
+"d": "Júpiter"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más grande del mundo?",
+"opciones": {
+"a": "Pacífico",
+"b": "Atlántico",
+"c": "Índico",
+"d": "Ártico"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el instrumento musical de viento más antiguo?",
+"opciones": {
+"a": "Flauta",
+"b": "Trompeta",
+"c": "Oboe",
+"d": "Clarinete"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el componente principal del aire que respiramos?",
+"opciones": {
+"a": "Nitrógeno",
+"b": "Oxígeno",
+"c": "Dióxido de carbono",
+"d": "Argón"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es la montaña más alta de África?",
+"opciones": {
+"a": "Kilimanjaro",
+"b": "Everest",
+"c": "Aconcagua",
+"d": "Mont Blanc"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Quién pintó la Mona Lisa?",
+"opciones": {
+"a": "Leonardo da Vinci",
+"b": "Pablo Picasso",
+"c": "Vincent van Gogh",
+"d": "Michelangelo"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el metal más pesado?",
+"opciones": {
+"a": "Osmio",
+"b": "Platino",
+"c": "Oro",
+"d": "Uranio"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué año llegó el hombre a la Luna por primera vez?",
+"opciones": {
+"a": "1969",
+"b": "1975",
+"c": "1983",
+"d": "1991"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la capital de España?",
+"opciones": {
+"a": "Madrid",
+"b": "Barcelona",
+"c": "Valencia",
+"d": "Sevilla"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el idioma más hablado del mundo?",
+"opciones": {
+"a": "Mandarín",
+"b": "Español",
+"c": "Inglés",
+"d": "Hindi"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el órgano más grande del cuerpo humano?",
+"opciones": {
+"a": "Piel",
+"b": "Hígado",
+"c": "Pulmones",
+"d": "Cerebro"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué continente se encuentra Egipto?",
+"opciones": {
+"a": "África",
+"b": "Europa",
+"c": "Asia",
+"d": "América"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la novela 'Cien años de soledad'?",
+"opciones": {
+"a": "Gabriel García Márquez",
+"b": "Julio Cortázar",
+"c": "Mario Vargas Llosa",
+"d": "Pablo Neruda"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el metal más caro del mundo?",
+"opciones": {
+"a": "Rodio",
+"b": "Platino",
+"c": "Oro",
+"d": "Paladio"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más pequeño del mundo?",
+"opciones": {
+"a": "Ártico",
+"b": "Atlántico",
+"c": "Índico",
+"d": "Antártico"
+},
+"respuesta_correcta": "d"
+},
+{"pregunta": "¿Cuál es el país con mayor población del mundo?",
+"opciones": {
+"a": "China",
+"b": "India",
+"c": "Estados Unidos",
+"d": "Rusia"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Quién escribió la obra de teatro 'Romeo y Julieta'?",
+"opciones": {
+"a": "William Shakespeare",
+"b": "Federico García Lorca",
+"c": "Anton Chejov",
+"d": "Arthur Miller"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el elemento químico más ligero?",
+"opciones": {
+"a": "Hidrógeno",
+"b": "Helio",
+"c": "Litio",
+"d": "Carbono"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la ciudad más poblada del mundo?",
+"opciones": {
+"a": "Tokio",
+"b": "Nueva York",
+"c": "Shanghái",
+"d": "Ciudad de México"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué continente se encuentra Brasil?",
+"opciones": {
+"a": "Sudamérica",
+"b": "Europa",
+"c": "África",
+"d": "Oceanía"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la pintura La noche estrellada'?",
+"opciones": {
+"a": "Vincent van Gogh",
+"b": "Leonardo da Vinci",
+"c": "Pablo Picasso",
+"d": "Salvador Dalí"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el hueso más largo del cuerpo humano?",
+"opciones": {
+"a": "Fémur",
+"b": "Tibia",
+"c": "Húmero",
+"d": "Radio"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el número atómico del carbono?",
+"opciones": {
+"a": "6",
+"b": "8",
+"c": "12",
+"d": "16"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el idioma oficial de Brasil?",
+"opciones": {
+"a": "Portugués",
+"b": "Español",
+"c": "Inglés",
+"d": "Francés"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Quién fue el primer presidente de los Estados Unidos?",
+"opciones": {
+"a": "George Washington",
+"b": "Abraham Lincoln",
+"c": "Thomas Jefferson",
+"d": "Benjamin Franklin"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más frío del mundo?",
+"opciones": {
+"a": "Ártico",
+"b": "Atlántico",
+"c": "Pacífico",
+"d": "Índico"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el resultado de la siguiente operación matemática: 5 + 3 x 2 - 1?",
+"opciones": {
+"a": "10",
+"b": "9",
+"c": "8",
+"d": "7"
+},
+"respuesta_correcta": "c"
+},
+{"pregunta": "¿En qué país se encuentra la Gran Muralla China?",
+"opciones": {
+"a": "China",
+"b": "India",
+"c": "Japón",
+"d": "Corea del Sur"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el metal más utilizado en la fabricación de pilas?",
+"opciones": {
+"a": "Zinc",
+"b": "Cobre",
+"c": "Plomo",
+"d": "Litio"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el símbolo químico del oro?",
+"opciones": {
+"a": "Au",
+"b": "Ag",
+"c": "Fe",
+"d": "Cu"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el único mamífero capaz de volar?",
+"opciones": {
+"a": "Murciélago",
+"b": "Ratón",
+"c": "Rata",
+"d": "Ardilla"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la capital de Canadá?",
+"opciones": {
+"a": "Ottawa",
+"b": "Toronto",
+"c": "Vancouver",
+"d": "Montreal"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más salado del mundo?",
+"opciones": {
+"a": "Atlántico",
+"b": "Pacífico",
+"c": "Índico",
+"d": "Ártico"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Quién escribió el libro 'Don Quijote de la Mancha'?",
+"opciones": {
+"a": "Miguel de Cervantes",
+"b": "Gabriel García Márquez",
+"c": "Jorge Luis Borges",
+"d": "William Shakespeare"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la montaña más alta del mundo?",
+"opciones": {
+"a": "Everest",
+"b": "K2",
+"c": "Kangchenjunga",
+"d": "Lhotse"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el continente más pequeño del mundo?",
+"opciones": {
+"a": "Oceanía",
+"b": "Europa",
+"c": "África",
+"d": "Antártida"
+},
+"respuesta_correcta": "d"
+},
+{"pregunta": "¿En qué año terminó la Segunda Guerra Mundial?",
+"opciones": {
+"a": "1945",
+"b": "1939",
+"c": "1941",
+"d": "1948"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el metal más maleable?",
+"opciones": {
+"a": "Oro",
+"b": "Plata",
+"c": "Hierro",
+"d": "Aluminio"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más profundo del mundo?",
+"opciones": {
+"a": "Pacífico",
+"b": "Atlántico",
+"c": "Índico",
+"d": "Ártico"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué año comenzó la Primera Guerra Mundial?",
+"opciones": {
+"a": "1914",
+"b": "1917",
+"c": "1919",
+"d": "1922"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor extensión territorial del mundo?",
+"opciones": {
+"a": "Rusia",
+"b": "Canadá",
+"c": "China",
+"d": "Estados Unidos"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el símbolo químico del sodio?",
+"opciones": {
+"a": "Na",
+"b": "So",
+"c": "Sd",
+"d": "N"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país más pequeño del mundo?",
+"opciones": {
+"a": "Ciudad del Vaticano",
+"b": "Mónaco",
+"c": "Nauru",
+"d": "Tuvalu"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la obra 'Hamlet'?",
+"opciones": {
+"a": "William Shakespeare",
+"b": "Edgar Allan Poe",
+"c": "Fyodor Dostoyevsky",
+"d": "Charles Dickens"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el río más largo de Europa?",
+"opciones": {
+"a": "Volga",
+"b": "Danubio",
+"c": "Ródano",
+"d": "Rin"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país más poblado de Europa?",
+"opciones": {
+"a": "Rusia",
+"b": "Alemania",
+"c": "Francia",
+"d": "Reino Unido"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el proceso mediante el cual las plantas fabrican su alimento?",
+"opciones": {
+"a": "Fotosíntesis",
+"b": "Respiración",
+"c": "Evaporación",
+"d": "Transpiración"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el planeta más grande del sistema solar?",
+"opciones": {
+"a": "Júpiter",
+"b": "Saturno",
+"c": "Neptuno",
+"d": "Urano"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el elemento químico más abundante en el universo?",
+"opciones": {
+"a": "Hidrógeno",
+"b": "Helio",
+"c": "Carbono",
+"d": "Oxígeno"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la capital de Italia?",
+"opciones": {
+"a": "Roma",
+"b": "Milán",
+"c": "Nápoles",
+"d": "Turín"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor cantidad de islas en el mundo?",
+"opciones": {
+"a": "Suecia",
+"b": "Indonesia",
+"c": "Filipinas",
+"d": "Japón"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el autor del libro '1984'?",
+"opciones": {
+"a": "George Orwell",
+"b": "Aldous Huxley",
+"c": "Ray Bradbury",
+"d": "J.R.R. Tolkien"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el órgano encargado de producir la insulina en el cuerpo humano?",
+"opciones": {
+"a": "Páncreas",
+"b": "Hígado",
+"c": "Riñones",
+"d": "Corazón"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué año se fundó la ONU (Organización de las Naciones Unidas)?",
+"opciones": {
+"a": "1945",
+"b": "1952",
+"c": "1949",
+"d": "1937"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la novela 'Orgullo y prejuicio'?",
+"opciones": {
+"a": "Jane Austen",
+"b": "Emily Brontë",
+"c": "Charlotte Brontë",
+"d": "Virginia Woolf"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el continente con mayor diversidad de especies de animales?",
+"opciones": {
+"a": "América del Sur",
+"b": "África",
+"c": "Asia",
+"d": "Australia"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el hueso más pequeño del cuerpo humano?",
+"opciones": {
+"a": "Estribo",
+"b": "Falange",
+"c": "Peroné",
+"d": "Escápula"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país más pequeño de Sudamérica?",
+"opciones": {
+"a": "Uruguay",
+"b": "Surinam",
+"c": "Guyana",
+"d": "Ecuador"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el océano más cálido del mundo?",
+"opciones": {
+"a": "Índico",
+"b": "Atlántico",
+"c": "Pacífico",
+"d": "Antártico"
+},
+"respuesta_correcta": "c"
+},
+{"pregunta": "¿Cuál es el elemento químico más reactivo?",
+"opciones": {
+"a": "Francio",
+"b": "Flúor",
+"c": "Sodio",
+"d": "Oxígeno"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la obra 'La Odisea'?",
+"opciones": {
+"a": "Homero",
+"b": "Sófocles",
+"c": "Eurípides",
+"d": "Aristóteles"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el río más largo de América del Norte?",
+"opciones": {
+"a": "Misuri",
+"b": "Misisipi",
+"c": "Ohio",
+"d": "Colorado"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el país con mayor cantidad de volcanes activos?",
+"opciones": {
+"a": "Indonesia",
+"b": "Japón",
+"c": "México",
+"d": "Italia"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el instrumento musical más antiguo del mundo?",
+"opciones": {
+"a": "Flauta",
+"b": "Tambor",
+"c": "Lira",
+"d": "Arpa"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿En qué año se fundó Apple Inc.?",
+"opciones": {
+"a": "1976",
+"b": "1983",
+"c": "1991",
+"d": "2000"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el océano más grande del mundo?",
+"opciones": {
+"a": "Pacífico",
+"b": "Atlántico",
+"c": "Índico",
+"d": "Antártico"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor cantidad de premios Nobel en la historia?",
+"opciones": {
+"a": "Estados Unidos",
+"b": "Reino Unido",
+"c": "Alemania",
+"d": "Francia"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el pigmento responsable del color de la piel humana?",
+"opciones": {
+"a": "Melanina",
+"b": "Hemoglobina",
+"c": "Clorofila",
+"d": "Caroteno"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con mayor superficie forestal del mundo?",
+"opciones": {
+"a": "Rusia",
+"b": "Brasil",
+"c": "Canadá",
+"d": "Estados Unidos"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el animal más grande del planeta Tierra?",
+"opciones": {
+"a": "Ballena azul",
+"b": "Elefante africano",
+"c": "Tiburón ballena",
+"d": "Jirafa"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor cantidad de ríos en el mundo?",
+"opciones": {
+"a": "Brasil",
+"b": "Rusia",
+"c": "Canadá",
+"d": "China"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el proceso mediante el cual las plantas obtienen energía a partir de la luz del sol?",
+"opciones": {
+"a": "Fotosíntesis",
+"b": "Respiración celular",
+"c": "Mitosis",
+"d": "Meiosis"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el símbolo químico del calcio?",
+"opciones": {
+"a": "Ca",
+"b": "Cl",
+"c": "Cu",
+"d": "Cs"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es la capital de Australia?",
+"opciones": {
+"a": "Canberra",
+"b": "Sídney",
+"c": "Melbourne",
+"d": "Brisbane"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con mayor cantidad de patrimonios de la humanidad según la UNESCO?",
+"opciones": {
+"a": "Italia",
+"b": "China",
+"c": "España",
+"d": "Francia"
+},
+"respuesta_correcta": "c"
+},
+{"pregunta": "¿Cuál es el animal más veloz del mundo?",
+"opciones": {
+"a": "Guepardo",
+"b": "León",
+"c": "Águila real",
+"d": "Antílope"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿En qué país se encuentra la ciudad de Machu Picchu?",
+"opciones": {
+"a": "Perú",
+"b": "México",
+"c": "Chile",
+"d": "Colombia"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el órgano encargado de producir la bilis?",
+"opciones": {
+"a": "Hígado",
+"b": "Vesícula biliar",
+"c": "Páncreas",
+"d": "Intestino delgado"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el río más largo de África?",
+"opciones": {
+"a": "Nilo",
+"b": "Congo",
+"c": "Níger",
+"d": "Zambeze"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el símbolo químico del hierro?",
+"opciones": {
+"a": "Fe",
+"b": "Hg",
+"c": "Ir",
+"d": "He"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con mayor cantidad de medallas en los Juegos Olímpicos de Verano?",
+"opciones": {
+"a": "Estados Unidos",
+"b": "China",
+"c": "Rusia",
+"d": "Alemania"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la novela 'Cien años de soledad'?",
+"opciones": {
+"a": "Gabriel García Márquez",
+"b": "Julio Cortázar",
+"c": "Mario Vargas Llosa",
+"d": "Isabel Allende"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor extensión de costa en el mundo?",
+"opciones": {
+"a": "Canadá",
+"b": "Australia",
+"c": "Rusia",
+"d": "Brasil"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el proceso mediante el cual los seres vivos intercambian gases con el medio ambiente?",
+"opciones": {
+"a": "Respiración",
+"b": "Fotosíntesis",
+"c": "Digestión",
+"d": "Excreción"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la obra 'Romeo y Julieta'?",
+"opciones": {
+"a": "William Shakespeare",
+"b": "Oscar Wilde",
+"c": "Ernest Hemingway",
+"d": "Jane Austen"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con mayor cantidad de islas en el Caribe?",
+"opciones": {
+"a": "Cuba",
+"b": "Bahamas",
+"c": "Jamaica",
+"d": "Puerto Rico"
+},
+"respuesta_correcta": "b"
+},
+{"pregunta": "¿Cuál es el metal más ligero del mundo?",
+"opciones": {
+"a": "Aluminio",
+"b": "Plata",
+"c": "Oro",
+"d": "Cobre"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el continente más poblado del mundo?",
+"opciones": {
+"a": "Asia",
+"b": "África",
+"c": "Europa",
+"d": "América"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con mayor cantidad de obeliscos en el mundo?",
+"opciones": {
+"a": "Egipto",
+"b": "Italia",
+"c": "Argentina",
+"d": "Francia"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el hueso más pequeño del cuerpo humano?",
+"opciones": {
+"a": "Estribo",
+"b": "Falange",
+"c": "Peroné",
+"d": "Escápula"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el país con la mayor cantidad de especies de mamíferos en el mundo?",
+"opciones": {
+"a": "Brasil",
+"b": "Indonesia",
+"c": "Australia",
+"d": "Estados Unidos"
+},
+"respuesta_correcta": "c"
+},
+{"pregunta": "¿Cuál es el proceso mediante el cual las plantas liberan agua al medio ambiente?",
+"opciones": {
+"a": "Transpiración",
+"b": "Evaporación",
+"c": "Fotosíntesis",
+"d": "Respiración"
+},
+"respuesta_correcta": "a"
+},
+{"pregunta": "¿Cuál es el autor de la obra 'Don Quijote de la Mancha'?",
+"opciones": {
+"a": "Miguel de Cervantes Saavedra",
+"b": "Federico García Lorca",
+"c": "Jorge Luis Borges",
+"d": "Pablo Neruda"
+},
+"respuesta_correcta": "a"
+}
+]
+}

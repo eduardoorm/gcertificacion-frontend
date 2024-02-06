@@ -1,0 +1,92 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { ClaseArchivoState } from "../../../interfaces/entities";
+import { APIStatus } from "../../../interfaces/response";
+import { addClaseArchivo, getClaseArchivoById, getClasesArchivos, getClasesArchivosByClase, updateClaseArchivo } from "./thunks";
+import { deleteArchivo } from "../archivo";
+
+const initialState: ClaseArchivoState = {
+    clasesArchivos: {
+        status: APIStatus.IDLE,
+        data: []
+    }
+}
+
+export const claseArchivoSlice = createSlice({
+    name: 'claseArchivo',
+    initialState,
+    reducers: { },
+    extraReducers(builder) {
+        builder
+        .addCase(getClasesArchivos.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(getClasesArchivos.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data = action.payload;
+        })
+        .addCase(getClasesArchivos.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        })
+        .addCase(getClaseArchivoById.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(getClaseArchivoById.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data = [action.payload];
+        })
+        .addCase(getClaseArchivoById.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        })
+        .addCase(getClasesArchivosByClase.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(getClasesArchivosByClase.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data = action.payload;
+        })
+        .addCase(getClasesArchivosByClase.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        })
+        .addCase(addClaseArchivo.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(addClaseArchivo.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data.push(action.payload[0]);
+        })
+        .addCase(addClaseArchivo.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        })
+        .addCase(updateClaseArchivo.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(updateClaseArchivo.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data = state.clasesArchivos.data.map((item) => {
+                if (item.id === action.payload.id) {
+                    return action.payload;
+                }
+                return item;
+            })
+        })
+        .addCase(updateClaseArchivo.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        })
+        .addCase(deleteArchivo.pending, (state) => {
+            state.clasesArchivos.status = APIStatus.PENDING;
+        })
+        .addCase(deleteArchivo.fulfilled, (state, action) => {
+            state.clasesArchivos.status = APIStatus.FULFILLED;
+            state.clasesArchivos.data = state.clasesArchivos.data.filter((item) => item.id !== action.payload.id);
+        })
+        .addCase(deleteArchivo.rejected, (state, action) => {
+            state.clasesArchivos.status = APIStatus.REJECTED;
+            state.clasesArchivos.error = action.payload;
+        });
+    }
+});

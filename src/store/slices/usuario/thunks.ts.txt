@@ -1,0 +1,19 @@
+import { AnyAction, Dispatch, createAsyncThunk } from "@reduxjs/toolkit";
+import { setUsuarios, startLoadingUsuarios } from "./usuarioSlice"
+import { gcertificacionApi } from "../../../api/gcertificacionApi";
+
+
+export const getUsuarios = (dispatch: Dispatch, arg: string) => {
+    const _ = createAsyncThunk('/usuarios', async(userId: string) => {
+        
+        dispatch(startLoadingUsuarios());
+        
+        const {data} = await gcertificacionApi.get('/usuarios');
+        
+        dispatch(setUsuarios({usuarios: data.usuarios}));
+
+        return data;
+    });
+
+    return _(arg);
+};

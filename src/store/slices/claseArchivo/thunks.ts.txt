@@ -1,0 +1,83 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ClaseArchivo } from "../../../interfaces/entities";
+import { APIError, APIResponse } from "../../../interfaces/response";
+import { gcertificacionApi } from "../../../api/gcertificacionApi";
+import { getExceptionPayload } from "../../../util/getExceptionPayload";
+
+export const getClasesArchivos = createAsyncThunk<
+        ClaseArchivo[],
+        void,
+        {rejectValue: APIError<ClaseArchivo[]>}
+    >('get/clases-archivos', async(_, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.get<APIResponse<ClaseArchivo[]>>('/clases-archivos');
+        return response.data.data;
+    } catch (err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
+
+export const getClaseArchivoById = createAsyncThunk<
+        ClaseArchivo,
+        string,
+        {rejectValue: APIError<ClaseArchivo>}
+    >('get/clases-archivos/id', async(id: string, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.get<APIResponse<ClaseArchivo[]>>(`/clases-archivos/${id}`);
+        return response.data.data[0];
+    } catch (err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
+
+export const getClasesArchivosByClase = createAsyncThunk<
+        ClaseArchivo[],
+        string,
+        {rejectValue: APIError<ClaseArchivo[]>}
+    >('get/clases-archivo/clases/id', async(id: string, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.get<APIResponse<ClaseArchivo[]>>(`/clases-archivos/clases/${id}`);
+        return response.data.data;
+    } catch (err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
+
+export const addClaseArchivo = createAsyncThunk<
+        ClaseArchivo[],
+        ClaseArchivo,
+        {rejectValue: APIError<ClaseArchivo[]>}
+    >('post/clases-archivos', async(archivoData, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.post<APIResponse<ClaseArchivo[]>>('/clases-archivos', archivoData);
+        return response.data.data;
+    } catch(err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
+
+export const updateClaseArchivo = createAsyncThunk<
+        ClaseArchivo,
+        ClaseArchivo,
+        {rejectValue: APIError<ClaseArchivo>}
+    >('put/clases-archivos', async(archivoData, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.put<APIResponse<ClaseArchivo[]>>(`/clases-archivos/${archivoData.id}`, archivoData);
+        return response.data.data[0];
+    } catch(err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
+
+export const deleteClaseArchivo = createAsyncThunk<
+        ClaseArchivo,
+        string,
+        {rejectValue: APIError<ClaseArchivo>}
+    >('delete/clases-archivos', async(id, {rejectWithValue}) => {
+    try {
+        const response = await gcertificacionApi.delete<APIResponse<ClaseArchivo[]>>(`/clases-archivos/${id}`);
+        return response.data.data[0];
+    } catch(err: any) {
+        return rejectWithValue(getExceptionPayload(err));
+    }
+});
