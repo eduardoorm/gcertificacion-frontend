@@ -69,7 +69,6 @@ export const archivoSlice = createSlice({
         })
         .addCase(updateArchivo.fulfilled, (state, action) => {
             state.archivos.status = APIStatus.FULFILLED;
-                    console.log('encontrado: ' + JSON.stringify(state.archivos.data));
             state.archivos.data = state.archivos.data.map(archivo => {
                 if (archivo.id === action.payload.id) {
                     return action.payload;

@@ -37,7 +37,6 @@ export const getClasesByEmpresa = createAsyncThunk<
     >('get/clases/empresa/id', async(id: string, {rejectWithValue}) => {
     try {
         const response = await gcertificacionApi.get<APIResponse<Clase[]>>(`/empresas-clientes/${id}/periodo-activo/clases`);
-        console.log('respuesta del thunk getClasesByEmpresa');
         return response.data.data;
     } catch (err: any) {
         return rejectWithValue(getExceptionPayload(err));

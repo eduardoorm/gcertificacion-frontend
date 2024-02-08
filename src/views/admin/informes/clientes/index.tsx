@@ -200,7 +200,6 @@ export default function AdminInformesClientesView(){
             }
         },
         onRejected: (error) => {
-            console.log(typeof error.status);
             if (error.statusText === 'Not Found') {
                 setToastMessageSeverity('warning');
                 setToastMessage('No se encontraron clases para este cliente');
@@ -245,7 +244,6 @@ export default function AdminInformesClientesView(){
     }
 
     const handleClickBarCapacitacion = (params: any) => {
-        console.log(params);
         setAreaCapacitacionSelected(params.name);
         setOptionsGaugeCapacitacion({
             ...InitialGaugeOptions,

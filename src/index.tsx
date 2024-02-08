@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
-import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import App from './App';
 import theme from './theme';
-import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Login from './views/pages/Login';
+import { BrowserRouter} from 'react-router-dom';
 import config from './config';
 import { AuthProvider } from 'react-auth-kit';
 

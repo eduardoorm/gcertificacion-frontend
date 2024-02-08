@@ -41,12 +41,14 @@ export default function ViewTrabajadorDefault(){
         }
     }), [clasesReducer]));
 
+
     return (
         <Box component="main" sx={{width: '100%', }}>
             <HeaderTrabajadorView />
 
             <Paper sx={{width: '100%', p:2}}>
                 <Grid container spacing={4} justifyContent={'center'}>
+
                 {inducciones.map(induccion => {
                     let fecha_inicio = moment(induccion.fecha_inicio);
                     let fecha_fin = moment(induccion.fecha_fin);
@@ -81,6 +83,8 @@ export default function ViewTrabajadorDefault(){
                     </Grid>
                     )
                 })}
+
+                
                 {capacitaciones.length > 0 &&
                 <Grid item key={'capacitacion'} xs={12} sm={6} md={4}>
                     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >

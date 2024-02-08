@@ -71,7 +71,6 @@ export default function ViewTrabajadorDocumentacion(){
             setClase(data[0]);
             if(!data[0]) setArchivos([]);
             else setArchivos(data[0].archivos || []);
-            console.log(data[0]);
         },
         onRejected: error => {
             console.log(error);
@@ -83,7 +82,6 @@ export default function ViewTrabajadorDocumentacion(){
     useAPIData(declaracionesJuradasReducer, React.useMemo(() => ({
         onFulfilled: (data: ArchivoTrabajador[]) => {
             setDeclaracionesJuradas(data);
-            console.log(data);
         },
         onRejected: error => {
             console.log(error);

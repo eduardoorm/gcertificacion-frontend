@@ -153,8 +153,6 @@ export default function AdminPeriodoIDView() {
                     return false;
                 }
                 let data = JSON.parse(responseText);
-                console.log(clases);
-                console.log(clase);
                 clases.map((clase_) => {
                     if (clase_.id === clase.id) {
                         dispatch(updateClase({...clase_, imagen: `${config.baseUrl}${config.thumbnailPath}/${data.data[0].filename}`}));

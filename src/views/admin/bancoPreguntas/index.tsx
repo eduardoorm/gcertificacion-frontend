@@ -125,7 +125,6 @@ export default function AdminBancosPreguntasView() {
             setClases(data)
         },
         onRejected: (error) => {
-            console.log(typeof error.status);
             if (error.statusText === 'Not Found') {
                 setToastMessageSeverity('warning');
                 setToastMessage('No se encontraron clases para este cliente');
@@ -148,7 +147,6 @@ export default function AdminBancosPreguntasView() {
         },
         onRejected: (error) => {
             setLoading(false);
-            console.log(typeof error.status);
             if (error.statusText === 'Not Found') {
                 setToastMessageSeverity('warning');
                 setToastMessage('No se encontraron clases para este cliente');

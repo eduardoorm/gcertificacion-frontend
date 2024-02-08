@@ -703,7 +703,6 @@ export default function AdminClienteIDView () {
 
     const handleOpenDialogClase = () => {
         setOpenDialogClase(true);
-        console.log(selected);
     }
 
     const handleCloseDialogClase = () => {

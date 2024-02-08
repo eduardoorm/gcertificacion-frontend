@@ -424,7 +424,6 @@ export default function AdminClaseIDView() {
                     return false;
                 }
                 let data = JSON.parse(responseText);
-                console.log(archivo);
                 setArchivo({...archivo, url:`${config.baseUrl}${config.videoPath}/${data.data[0].filename}`})
                 return true;
             },

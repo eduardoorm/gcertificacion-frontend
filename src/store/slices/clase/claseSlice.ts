@@ -47,7 +47,6 @@ export const claseSlice = createSlice({
             state.clases.status = APIStatus.PENDING;
         })
         .addCase(getClasesByEmpresa.fulfilled, (state, action) => {
-            console.log('dentro de getClasesByEmpresa en el archivo claseSlice');
             state.clases.status = APIStatus.FULFILLED;
             state.clases.data = action.payload;
         })
