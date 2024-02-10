@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import {  TIPO_CLASE } from "../../interfaces/entities";
 import SectionClass from "../SectionClass/SectionClass";
 
-const PaperClasses = ({clases, handleClick, handleEditClase, handleLoadImage, handleOpenDialogConfirmation}) => {
+const PaperClasses = ({clases, actions, ...restProps}) => {
     return (
         <Paper sx={{ width: "100%", mt: 3, mb: 2, p: 2 }} elevation={3}>
             <Grid
@@ -19,33 +19,36 @@ const PaperClasses = ({clases, handleClick, handleEditClase, handleLoadImage, ha
             >
                 <SectionClass
                     clases={clases}
+                    actions={actions}
                     tipo={TIPO_CLASE.INDUCCION}
                     titleTag="Inducción"
                     iconTag={<MenuBookIcon />}
-                    handleClick={handleClick}
-                    handleEditClase={handleEditClase}
-                    handleLoadImage={handleLoadImage}
-                    handleOpenDialogConfirmation={handleOpenDialogConfirmation}
+                    handleClick={restProps.handleClick}
+                    handleEditClase={restProps.handleEditClase}
+                    handleLoadImage={restProps.handleLoadImage}
+                    handleOpenDialogConfirmation={restProps.handleOpenDialogConfirmation}
                 />
                 <SectionClass
                     clases={clases}
+                    actions={actions}
                     tipo={TIPO_CLASE.CAPACITACION}
                     titleTag="Capacitación"
                     iconTag={<ConstructionIcon />}
-                    handleClick={handleClick}
-                    handleEditClase={handleEditClase}
-                    handleLoadImage={handleLoadImage}
-                    handleOpenDialogConfirmation={handleOpenDialogConfirmation}
+                    handleClick={restProps.handleClick}
+                    handleEditClase={restProps.handleEditClase}
+                    handleLoadImage={restProps.handleLoadImage}
+                    handleOpenDialogConfirmation={restProps.handleOpenDialogConfirmation}
                 />
                 <SectionClass
                     clases={clases}
+                    actions={actions}
                     tipo={TIPO_CLASE.DOCUMENTACION}
                     titleTag="Documentación"
                     iconTag={<PictureAsPdfIcon />}
-                    handleClick={handleClick}
-                    handleEditClase={handleEditClase}
-                    handleLoadImage={handleLoadImage}
-                    handleOpenDialogConfirmation={handleOpenDialogConfirmation}
+                    handleClick={restProps.handleClick}
+                    handleEditClase={restProps.handleEditClase}
+                    handleLoadImage={restProps.handleLoadImage}
+                    handleOpenDialogConfirmation={restProps.handleOpenDialogConfirmation}
                 />
             </Grid>
         </Paper>

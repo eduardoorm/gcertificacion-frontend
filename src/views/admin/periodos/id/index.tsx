@@ -79,7 +79,6 @@ const uppyImage = new Uppy({
     endpoint: `${config.baseUrl}${config.thumbnailPath}`,
     fieldName: "image",
 });
-
 const initialStatePeriodo: Periodo = {
     id: 0,
     id_empresa_cliente: 0,
@@ -271,7 +270,6 @@ export default function AdminPeriodoIDView() {
             [clasesReducer]
         )
     );
-
     const handleCloseToastResponse = () => {
         setOpenToastResponse(false);
     };
@@ -366,7 +364,6 @@ export default function AdminPeriodoIDView() {
             { replace: false }
         );
     };
-
     return (
         <Box sx={{ width: "100%" }}>
             {loading && (
@@ -544,7 +541,8 @@ export default function AdminPeriodoIDView() {
                 {clases && clases.length > 0 && 
                 (
                     <PaperClasses 
-                    clases={clases}                                             
+                    clases={clases}  
+                    actions={true}                                           
                     handleClick={handleClick}
                     handleEditClase={handleEditClase}
                     handleLoadImage={handleLoadImage}

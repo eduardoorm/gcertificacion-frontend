@@ -1,9 +1,8 @@
 import BoxClass from "../BoxClass/BoxClass";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import Grid from "@mui/material/Grid";
 import Tag from "../Tag/Tag";
 
-const SectionClass = ({ clases, tipo, titleTag = "", iconTag, handleClick, handleEditClase, handleLoadImage, handleOpenDialogConfirmation}) => 
+const SectionClass = ({ clases,actions, tipo, titleTag = "", iconTag, handleClick, handleEditClase, handleLoadImage, handleOpenDialogConfirmation}) => 
 {
     return (
         <>
@@ -29,7 +28,9 @@ const SectionClass = ({ clases, tipo, titleTag = "", iconTag, handleClick, handl
                         {
                                 return (
                                     <BoxClass
+                                        key={clase.id}
                                         clase={clase}
+                                        actions={actions}
                                         handleClick={handleClick}
                                         handleEditClase={handleEditClase}
                                         handleLoadImage={handleLoadImage}

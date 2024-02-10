@@ -1,10 +1,8 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import BoxClassActions from "../BoxClassActions/BoxClassActions";
 
-const BoxClass = ({clase, handleClick, handleEditClase, handleLoadImage, handleOpenDialogConfirmation}) => {
+const BoxClass = ({clase, actions, handleClick, handleEditClase, handleLoadImage, handleOpenDialogConfirmation}) => {
     return (
         <Grid item xs={6} key={clase.id}>
             <Card sx={{ display: "flex" }}>
@@ -30,33 +28,14 @@ const BoxClass = ({clase, handleClick, handleEditClase, handleLoadImage, handleO
                         </CardContent>
                     </Box>
                 </CardActionArea>
-                <Box
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        pr: 1,
-                        pt: 1,
-                        flexDirection: "column",
-                    }}
-                >
-                    <IconButton
-                        onClick={(event) => handleEditClase(event, clase)}
-                    >
-                        <EditIcon />
-                    </IconButton>
-                    <IconButton
-                        onClick={(event) => handleLoadImage(event, clase)}
-                    >
-                        <AddPhotoAlternateIcon />
-                    </IconButton>
-                    <IconButton
-                        onClick={(event) =>
-                            handleOpenDialogConfirmation(event, clase)
-                        }
-                    >
-                        <DeleteIcon />
-                    </IconButton>
-                </Box>
+
+                {actions && (
+                    <BoxClassActions 
+                    handleEditClase={handleEditClase}
+                    handleLoadImage={handleLoadImage}
+                    handleOpenDialogConfirmation={handleOpenDialogConfirmation}/>
+                )}
+                
             </Card>
         </Grid>
     );
