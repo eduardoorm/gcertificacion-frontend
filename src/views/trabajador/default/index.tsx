@@ -49,7 +49,7 @@ export default function ViewTrabajadorDefault(){
             <Paper sx={{width: '100%', p:2}}>
                 <Grid container spacing={4} justifyContent={'center'}>
             
-            {/*
+
                 {inducciones.map(induccion => {
                     let fecha_inicio = moment(induccion.fecha_inicio);
                     let fecha_fin = moment(induccion.fecha_fin);
@@ -85,26 +85,43 @@ export default function ViewTrabajadorDefault(){
                     )
                 })}
 
+
+                {capacitaciones.map(capacitacion => {
+                    let fecha_inicio = moment(capacitacion.fecha_inicio);
+                    let fecha_fin = moment(capacitacion.fecha_fin);
+                    let fecha_actual = moment();
+
+                    let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
+
+                    return (
+                        <Grid item key={capacitacion.id} xs={12} sm={6} md={4}>
+                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
+                            <CardActionArea onClick={() => navigate(`/trabajador/capacitacion/${capacitacion.id}`, {replace: false}) } disabled={!disponible} >
+                                <CardMedia
+                                    component="img"
+                                    height="280"
+                                    sx={{width: 'fit-content'}}
+                                    image={capacitacion.imagen}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {capacitacion.titulo}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {capacitacion.descripcion}
+                                    </Typography>
+                                    {!disponible &&
+                                    <Typography variant="body2" color="text.secondary">
+                                        Disponible desde: {fecha_inicio.format('DD/MM/YYYY')}
+                                    </Typography>}
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    )
+                })}             
+
                 
-                {capacitaciones.length > 0 &&
-                <Grid item key={'capacitacion'} xs={12} sm={6} md={4}>
-                    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                        <CardActionArea onClick={() => navigate('/trabajador/capacitacion', {replace: false}) } >
-                            <CardMedia
-                                component="img"
-                                height="280"
-                                sx={{width: 'fit-content'}}
-                                image={capacitaciones[0].imagen}
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Sistema de gesti&oacute;n SST
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                }
 
                 {documentaciones.map(documentacion => {
                     let fecha_inicio = moment(documentacion.fecha_inicio);
@@ -140,7 +157,7 @@ export default function ViewTrabajadorDefault(){
                     </Grid>
                     )
                 })}
-            */}
+        
                 </Grid>
             </Paper>
         </Box>
