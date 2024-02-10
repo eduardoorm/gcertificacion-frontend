@@ -135,6 +135,7 @@ const StyledMenu = styled((props: MenuProps) => (
     },
   }));
 
+  
 
 const uppyVideo = new Uppy({ id: 'uppyVideo', locale: es_PE, autoProceed: false, debug: true, restrictions: {
     maxNumberOfFiles: 1,

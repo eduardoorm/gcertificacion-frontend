@@ -30,10 +30,12 @@ const TrabajadorDocumentacion = Loadable(lazy(() => import('../views/trabajador/
 const MainRoutes = {
     path: '/',
     element: <MainLayout />,
-    children: [{
+    children: [
+    {
         path: '/',
         element: <DashboardDefault /> 
-    },{
+    },
+    {
         path: 'admin',
         children: [{
             path: 'default',
@@ -63,13 +65,15 @@ const MainRoutes = {
             path: 'informes/clientes/:id',
             element: <PrivateRoute><AdminInformesClientes /></PrivateRoute>
         }]
-    }, {
+    }, 
+    {
         path: 'empresa',
         children: [{
             path: 'default/:id',
             element: <PrivateRoute><EmpresaDefault/></PrivateRoute>
         }]
-    }, {
+    }, 
+    {
         path: 'trabajador',
         children: [{
             path: 'default',

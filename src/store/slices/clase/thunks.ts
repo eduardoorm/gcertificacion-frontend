@@ -50,6 +50,7 @@ export const getClasesByTrabajador = createAsyncThunk<
     >('get/clases/trabajador/id', async(id: string, {rejectWithValue}) => {
     try {
         const response = await gcertificacionApi.get<APIResponse<Clase[]>>(`/trabajadores/${id}/periodo-activo/clases`);
+        console.log(response.data.data)
         return response.data.data;
     } catch (err: any) {
         return rejectWithValue(getExceptionPayload(err));

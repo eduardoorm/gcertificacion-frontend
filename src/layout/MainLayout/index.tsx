@@ -10,15 +10,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { AdminListItems, TrabajadorListItems, EmpresaListItems } from './listItems';
-import { useLocalState } from '../../util/localStorage';
+import { Logout } from '@mui/icons-material';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Avatar, CircularProgress, Container, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Avatar,Container, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useSignOut } from 'react-auth-kit'
+import { AdminListItems, TrabajadorListItems, EmpresaListItems } from './listItems';
 import { TIPO_USUARIO, UserAuthenticated } from '../../interfaces/entities';
 import { RootState, setUserAuthenticated, useAppDispatch, useAppSelector } from '../../store';
-import { Logout } from '@mui/icons-material';
-import { useIsAuthenticated } from 'react-auth-kit';
 import brand from '../../assets/images/brand.jpg';
 
 const initialStateUserAuthenticated: UserAuthenticated = {
