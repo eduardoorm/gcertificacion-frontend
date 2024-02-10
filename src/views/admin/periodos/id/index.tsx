@@ -64,6 +64,7 @@ import XHRUpload from "@uppy/xhr-upload";
 import es_PE from "../../../../util/uppy/es_PE";
 import Tag from "../../../../components/Tag/Tag";
 import BoxClass from "../../../../components/BoxClass/BoxClass";
+import PaperClasses from "../../../../components/PaperClasses/PaperClasses";
 
 const uppyImage = new Uppy({
     id: "uppyImage",
@@ -540,162 +541,15 @@ export default function AdminPeriodoIDView() {
                     </Typography>
                 </Grid>
 
-                {clases && clases.length > 0 && (
-                    <Paper
-                        sx={{ width: "100%", mt: 3, mb: 2, p: 2 }}
-                        elevation={3}
-                    >
-                        <Grid
-                            container
-                            spacing={2}
-                            direction={"row"}
-                            justifyContent={"flex-end"}
-                            alignItems={"center"}
-                        >
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.INDUCCION
-                                ).length > 0 && (
-                                    <Tag
-                                        label="Inducción"
-                                        icon={<MenuBookIcon />}
-                                    />
-                                )}
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.INDUCCION
-                                ).length > 0 && (
-                                    <Grid
-                                        container
-                                        spacing={2}
-                                        sx={{
-                                            m: 2,
-                                            pb: 2,
-                                            backgroundColor: "#E7EBF0",
-                                            borderRadius: 1,
-                                        }}
-                                        direction={"row"}
-                                        justifyContent={"flex-start"}
-                                        alignItems={"flex-start"}
-                                    >
-                                        {clases
-                                            .filter(
-                                                (clase) =>
-                                                    clase.tipo ===
-                                                    TIPO_CLASE.INDUCCION
-                                            )
-                                            .map((clase) => {
-                                                return (
-                                                    <BoxClass
-                                                        clase={clase}
-                                                        handleClick={handleClick}
-                                                        handleEditClase={handleEditClase}
-                                                        handleLoadImage={handleLoadImage}
-                                                        handleOpenDialogConfirmation= {handleOpenDialogConfirmation}
-                                                    />
-                                                );
-                                            })}
-                                    </Grid>
-                                )}
-
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.CAPACITACION
-                                ).length > 0 && (
-                                    <Tag
-                                        label="Capacitación"
-                                        icon={<ConstructionIcon />}
-                                    />
-                                )}
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.CAPACITACION
-                                ).length > 0 && (
-                                    <Grid
-                                        container
-                                        spacing={2}
-                                        sx={{
-                                            m: 2,
-                                            pb: 2,
-                                            backgroundColor: "#E7EBF0",
-                                            borderRadius: 1,
-                                        }}
-                                        direction={"row"}
-                                        justifyContent={"flex-start"}
-                                        alignItems={"flex-start"}
-                                    >
-                                        {clases
-                                            .filter(
-                                                (clase) =>
-                                                    clase.tipo ===
-                                                    TIPO_CLASE.CAPACITACION
-                                            )
-                                            .map((clase) => {
-                                                return (
-                                                    <BoxClass
-                                                    clase={clase}
-                                                    handleClick={handleClick}
-                                                    handleEditClase={handleEditClase}
-                                                    handleLoadImage={handleLoadImage}
-                                                    handleOpenDialogConfirmation= {handleOpenDialogConfirmation}
-                                                />
-                                                );
-                                            })}
-                                    </Grid>
-                                )}
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.DOCUMENTACION
-                                ).length > 0 && (
-                                    <Tag
-                                        label="Documentación"
-                                        icon={<PictureAsPdfIcon />}
-                                    />
-                                )}
-                            {clases &&
-                                clases.filter(
-                                    (clase) =>
-                                        clase.tipo === TIPO_CLASE.DOCUMENTACION
-                                ).length > 0 && (
-                                    <Grid
-                                        container
-                                        spacing={2}
-                                        sx={{
-                                            m: 2,
-                                            pb: 2,
-                                            backgroundColor: "#E7EBF0",
-                                            borderRadius: 1,
-                                        }}
-                                        direction={"row"}
-                                        justifyContent={"flex-start"}
-                                        alignItems={"flex-start"}
-                                    >
-                                        {clases
-                                            .filter(
-                                                (clase) =>
-                                                    clase.tipo ===
-                                                    TIPO_CLASE.DOCUMENTACION
-                                            )
-                                            .map((clase) => {
-                                                return (
-                                                    <BoxClass
-                                                    clase={clase}
-                                                    handleClick={handleClick}
-                                                    handleEditClase={handleEditClase}
-                                                    handleLoadImage={handleLoadImage}
-                                                    handleOpenDialogConfirmation= {handleOpenDialogConfirmation}
-                                                />
-                                                );
-                                            })}
-                                    </Grid>
-                                )}
-                        </Grid>
-                    </Paper>
+                {clases && clases.length > 0 && 
+                (
+                    <PaperClasses 
+                    clases={clases}                                             
+                    handleClick={handleClick}
+                    handleEditClase={handleEditClase}
+                    handleLoadImage={handleLoadImage}
+                    handleOpenDialogConfirmation={handleOpenDialogConfirmation}
+                     />
                 )}
             </Grid>
 
