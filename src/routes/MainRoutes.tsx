@@ -24,6 +24,8 @@ const EmpresaDefault = Loadable(lazy(() => import('../views/empresa/default')));
 const TrabajadorDefault = Loadable(lazy(() => import('../views/trabajador/default')));
 const TrabajadorInduccion = Loadable(lazy(() => import('../views/trabajador/induccion')));
 const TrabajadorCapacitacionDefault = Loadable(lazy(() => import('../views/trabajador/capacitacion')));
+const TrabajadorInduccionDefault = Loadable(lazy(() => import('../views/trabajador/induccion/default')));
+
 const TrabajadorCapacitacion = Loadable(lazy(() => import('../views/trabajador/capacitacion/id')));
 const TrabajadorDocumentacion = Loadable(lazy(() => import('../views/trabajador/documentacion')));
 
@@ -80,8 +82,13 @@ const MainRoutes = {
             element: <PrivateRoute><TrabajadorDefault/></PrivateRoute>
         }, {
             path: 'induccion',
+            element: <PrivateRoute><TrabajadorInduccionDefault/></PrivateRoute>
+        }
+        , {
+            path: 'induccion/:id',
             element: <PrivateRoute><TrabajadorInduccion/></PrivateRoute>
-        }, {
+        },
+        {
             path: 'capacitacion',
             element: <PrivateRoute><TrabajadorCapacitacionDefault/></PrivateRoute>
         }, {
@@ -90,7 +97,12 @@ const MainRoutes = {
         }, {
             path: 'documentacion',
             element: <PrivateRoute><TrabajadorDocumentacion/></PrivateRoute>
-        }]
+        }
+        , {
+            path: 'documentacion/:id',
+            element: <PrivateRoute><TrabajadorDocumentacion/></PrivateRoute>
+        }
+    ]
     }]
 }
 
