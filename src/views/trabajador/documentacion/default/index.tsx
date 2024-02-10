@@ -15,10 +15,10 @@ import { useAuthUser } from 'react-auth-kit'
 import HeaderTrabajadorView from "../../header";
 import moment from "moment";
 
-export default function ViewInduccionDefault () {
+export default function ViewDocumentacionDefault () {
     const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
     //const [trabajador, setTrabajador] = React.useState<Trabajador>(initialStateTrabajador);
-    const [inducciones, setInducciones] = React.useState<Clase[]>([]);
+    const [documentaciones, setDocumentaciones] = React.useState<Clase[]>([]);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const auth = useAuthUser();
@@ -29,7 +29,7 @@ export default function ViewInduccionDefault () {
 
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
-            setInducciones(data.filter(clase => clase.tipo === TIPO_CLASE.INDUCCION));
+            setDocumentaciones(data.filter(clase => clase.tipo === TIPO_CLASE.DOCUMENTACION));
         },
         onRejected: error => {
             console.log(error);
@@ -43,29 +43,29 @@ export default function ViewInduccionDefault () {
 
             <Paper sx={{width: '100%', p:2}}>
                 <Grid container spacing={4} justifyContent={'center'}>
-                {inducciones.map(induccion => {
-                    let fecha_inicio = moment(induccion.fecha_inicio);
-                    let fecha_fin = moment(induccion.fecha_fin);
+                {documentaciones.map(documentacion => {
+                    let fecha_inicio = moment(documentacion.fecha_inicio);
+                    let fecha_fin = moment(documentacion.fecha_fin);
                     let fecha_actual = moment();
 
                     let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
 
                     return (
-                        <Grid item key={induccion.id} xs={12} sm={6} md={4}>
+                        <Grid item key={documentacion.id} xs={12} sm={6} md={4}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                            <CardActionArea onClick={() => navigate(`/trabajador/induccion/${induccion.id}`, {replace: false}) } disabled={!disponible} >
+                            <CardActionArea onClick={() => navigate(`/trabajador/documentacion/${documentacion.id}`, {replace: false}) } disabled={!disponible} >
                                 <CardMedia
                                     component="img"
                                     height="280"
                                     sx={{width: 'fit-content'}}
-                                    image={induccion.imagen}
+                                    image={documentacion.imagen}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
-                                        {induccion.titulo}
+                                        {documentacion.titulo}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        {induccion.descripcion}
+                                        {documentacion.descripcion}
                                     </Typography>
                                     {!disponible &&
                                     <Typography variant="body2" color="text.secondary">
