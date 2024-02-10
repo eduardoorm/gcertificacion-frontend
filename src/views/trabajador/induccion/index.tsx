@@ -40,7 +40,7 @@ import { addExamenAzar, getExamenAzarByClaseTrabajador, solveExamenAzar } from '
 import { useAuthUser } from 'react-auth-kit';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import '../../../assets/css/embla.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import HeaderTrabajadorView from '../header';
 
@@ -89,6 +89,7 @@ export default function ViewTrabajadorInduccion() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const auth = useAuthUser();
+    const { id } = useParams();
 
     const [emblaRef, emblaApi] = useEmblaCarousel();
     const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
@@ -132,9 +133,10 @@ export default function ViewTrabajadorInduccion() {
     
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
-            setClase(data[0] || initialStateClase);
-            if(data[0] && data[0].tipo === TIPO_CLASE.INDUCCION) {
-                dispatch(getExamenAzarByClaseTrabajador(data[0].clases_trabajadores?.id.toString() || '0'));
+            setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
+            if(data.filter(d => d.id === parseInt(id || '0'))[0] && data.filter(d => d.id === parseInt(id || '0'))[0].tipo === TIPO_CLASE.INDUCCION)
+            {
+                dispatch(getExamenAzarByClaseTrabajador(data.filter(d => d.id === parseInt(id || '0'))[0].clases_trabajadores?.id.toString() || '0'));
             }
         },
         onRejected: (error) => {

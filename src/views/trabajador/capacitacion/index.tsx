@@ -55,7 +55,7 @@ export default function ViewCapacitacionDefault(){
                     let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
 
                     return (
-                        <Grid item key={'capacitacion'} xs={12} sm={6} md={4}>
+                        <Grid item key={capacitacion.id} xs={12} sm={6} md={4}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
                             <CardActionArea onClick={() => navigate(`/trabajador/capacitacion/${capacitacion.id}`, {replace: false}) } disabled={!disponible} >
                                 <CardMedia
