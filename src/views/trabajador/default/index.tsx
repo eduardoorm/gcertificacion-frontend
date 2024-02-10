@@ -48,7 +48,8 @@ export default function ViewTrabajadorDefault(){
 
             <Paper sx={{width: '100%', p:2}}>
                 <Grid container spacing={4} justifyContent={'center'}>
-
+            
+            {/*
                 {inducciones.map(induccion => {
                     let fecha_inicio = moment(induccion.fecha_inicio);
                     let fecha_fin = moment(induccion.fecha_fin);
@@ -139,7 +140,7 @@ export default function ViewTrabajadorDefault(){
                     </Grid>
                     )
                 })}
-
+            */}
                 </Grid>
             </Paper>
         </Box>
