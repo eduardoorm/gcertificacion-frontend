@@ -15,7 +15,7 @@ import { TIPO_USUARIO, UserAuthenticated } from '../../interfaces/entities';
 import { RootState, setUserAuthenticated, useAppDispatch, useAppSelector } from '../../store';
 import brand from '../../assets/images/brand.jpg';
 import MenuCerrarSesion from '../../components/Util/MenuCerrarSesion/MenuCerrarSesion';
-import MenuPersistent from '../../components/Util/MenuCerrarSesion/MenuPersintent/MenuPersistent';
+import MenuPersistent from '../../components/Util/MenuPersintent/MenuPersistent';
 import MenuPermanente from '../../components/Util/MenuPermanente/MenuPermanente';
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -160,31 +160,53 @@ export default function MainLayout() {
             {/*Es el menu completo de la izquierda*/}
 
             {isMobile ? (
-                            <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
-
+                <>
+             <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
+             <Main open={open}
+             sx={{
+                 backgroundColor: (theme) =>
+                 theme.palette.mode === 'light'
+                     ? theme.palette.grey[100]
+                     : theme.palette.grey[900],
+                 flexGrow: 1,
+                 height: '100vh',
+                 overflow: 'auto',
+             }}
+         >
+             <DrawerHeader />
+             <Toolbar />
+             <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
+                 <Outlet />
+             </Container>
+         </Main>
+         </>
+          
             ) : (
-                <MenuPermanente openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
-
+                <>
+             <MenuPermanente openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
+             <Box 
+             sx={{
+                 backgroundColor: (theme) =>
+                 theme.palette.mode === 'light'
+                     ? theme.palette.grey[100]
+                     : theme.palette.grey[900],
+                 flexGrow: 1,
+                 height: '100vh',
+                 overflow: 'auto',
+             }}
+         >
+             <DrawerHeader />
+             <Toolbar />
+             <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
+                 <Outlet />
+             </Container>
+         </Box>
+         </>
             )}
 
             {/*La caja que va a contener el cotenido que se muestra cada que seleccionamos una opción */}
-            <Main open={open}
-                sx={{
-                    backgroundColor: (theme) =>
-                    theme.palette.mode === 'light'
-                        ? theme.palette.grey[100]
-                        : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
-                }}
-            >
-                <DrawerHeader />
-                <Toolbar />
-                <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
-                    <Outlet />
-                </Container>
-            </Main>
+            {/*Main open ={open} para que se sobreponga el menu */}
+            
         </Box>
     );
 }

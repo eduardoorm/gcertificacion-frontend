@@ -3,9 +3,9 @@ import React from "react";
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
-import { AdminListItems, EmpresaListItems, TrabajadorListItems } from "../../../../layout/MainLayout/listItems";
+import { AdminListItems, EmpresaListItems, TrabajadorListItems } from "../../../layout/MainLayout/listItems";
 import styled from "@emotion/styled";
-import { TIPO_USUARIO } from '../../../../interfaces/entities';
+import { TIPO_USUARIO } from '../../../interfaces/entities';
 
 const drawerWidth = 240;
 

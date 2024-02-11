@@ -14,6 +14,7 @@ import { useAPIData } from "../../../api/useAPIData";
 import { useAuthUser } from 'react-auth-kit'
 import HeaderTrabajadorView from "../header";
 import moment from "moment";
+import { orange } from "@mui/material/colors";
 
 export default function ViewTrabajadorDefault(){
     const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
@@ -41,15 +42,15 @@ export default function ViewTrabajadorDefault(){
         }
     }), [clasesReducer]));
 
+    
 
     return (
         <Box component="main" sx={{width: '100%', }}>
             <HeaderTrabajadorView />
 
             <Paper sx={{width: '100%', p:2}}>
-                <Grid container spacing={4} justifyContent={'center'}>
-            
-
+                <Grid container display={"flex"} spacing={2} justifyContent={'center'}>
+        
                 {inducciones.map(induccion => {
                     let fecha_inicio = moment(induccion.fecha_inicio);
                     let fecha_fin = moment(induccion.fecha_fin);
@@ -58,13 +59,16 @@ export default function ViewTrabajadorDefault(){
                     let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
 
                     return (
-                        <Grid item key={induccion.id} xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                            <CardActionArea onClick={() => navigate(`/trabajador/induccion/${induccion.id}`, {replace: false}) } disabled={!disponible} >
+                        <Grid item key={induccion.id} xs={12} sm={6} md={4}  border={3}>
+                        <Card 
+                            sx={{ display: 'flex', flexDirection: 'column' }} >  
+                            <CardActionArea 
+                            sx={{border:"5px solid",height: {xs: 120, sm:240, md:"220px" } }}
+                            onClick={() => navigate(`/trabajador/induccion/${induccion.id}`, {replace: false}) } 
+                            disabled={!disponible} >
                                 <CardMedia
                                     component="img"
-                                    height="280"
-                                    sx={{width: 'fit-content'}}
+                                    sx={{width: '100%', border:"6px solid red" , height:"20%"}}
                                     image={induccion.imagen}
                                 />
                                 <CardContent>
@@ -101,7 +105,7 @@ export default function ViewTrabajadorDefault(){
                                     component="img"
                                     height="280"
                                     sx={{width: 'fit-content'}}
-                                    image={capacitacion.imagen}
+                                    image={capacitacion.imagen}  
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
