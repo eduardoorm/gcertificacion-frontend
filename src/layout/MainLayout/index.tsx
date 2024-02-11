@@ -20,6 +20,7 @@ import { TIPO_USUARIO, UserAuthenticated } from '../../interfaces/entities';
 import { RootState, setUserAuthenticated, useAppDispatch, useAppSelector } from '../../store';
 import brand from '../../assets/images/brand.jpg';
 import MenuCerrarSesion from '../../components/Util/MenuCerrarSesion/MenuCerrarSesion';
+import MenuPersistent from '../../components/Util/MenuCerrarSesion/MenuPersintent/MenuPersistent';
 const initialStateUserAuthenticated: UserAuthenticated = {
     id_trabajador: 0,
     nombres: '',
@@ -153,44 +154,7 @@ export default function MainLayout() {
             </AppBar>
 
             {/*Es el menu completo de la izquierda*/}
-            <Drawer 
-                    sx={{
-                        width: drawerWidth,
-                        flexShrink: 0,
-                        "& .MuiDrawer-paper": {
-                          width: drawerWidth,
-                          boxSizing: "border-box",
-                        },
-                      }}
-            variant="persistent"
-            anchor="left"
-            open={openAppBar}>
-                {/*Ecabezado Menú*/}          
-                <DrawerHeader>
-                    <img src={brand} alt="Global Certificación" width={'75%'} />
-                    <IconButton onClick={toggleDrawer}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </DrawerHeader>
-                
-                <Divider />
-                 {/*Lista Items Menú en caso sea ADMIN, TRABAJADOR O EMPRESA*/} 
-                 {openAppBar &&         
-                <List>
-                    {userAuthenticated.tipo === TIPO_USUARIO.ADMIN && 
-                    <AdminListItems/>}
-                    {userAuthenticated.tipo === TIPO_USUARIO.ADMIN && 
-                    <Divider sx={{ my: 1 }} /> }
-                    {userAuthenticated.tipo === TIPO_USUARIO.TRABAJADOR && 
-                    <TrabajadorListItems title='' /> }
-                    {userAuthenticated.tipo === TIPO_USUARIO.TRABAJADOR && 
-                    <Divider sx={{ my: 1 }} />}
-                    {userAuthenticated.tipo === TIPO_USUARIO.EMPRESA && 
-                    <EmpresaListItems/>}
-                </List>
-                    
-                    }
-            </Drawer>
+             <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated}/>
 
             {/*La caja que va a contener el cotenido que se muestra cada que seleccionamos una opción */}
             <Main open={open}
