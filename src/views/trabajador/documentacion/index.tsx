@@ -8,7 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import FileDownloadDoneIcon from '@mui/icons-material/FileDownloadDone';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import { RootState, getClasesDocumentacionByTrabajador, useAppDispatch, useAppSelector } from "../../../store";
 import { useAPIData } from "../../../api/useAPIData";
@@ -60,6 +60,7 @@ export default function ViewTrabajadorDocumentacion(){
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const auth = useAuthUser();
+    const { id } = useParams();
 
     React.useEffect(() => {
         dispatch(getClasesDocumentacionByTrabajador(auth()?.id_trabajador || '0'));
@@ -68,9 +69,10 @@ export default function ViewTrabajadorDocumentacion(){
 
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
-            setClase(data[0]);
+            //setClase(data[0]);
+            setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
             if(!data[0]) setArchivos([]);
-            else setArchivos(data[0].archivos || []);
+            else setArchivos(clase.archivos || []);
         },
         onRejected: error => {
             console.log(error);
