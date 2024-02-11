@@ -58,9 +58,9 @@ export default function ViewTrabajadorDefault(){
                     let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
 
                     return (
-                        <Grid item key={'induccion'} xs={12} sm={6} md={4}>
+                        <Grid item key={induccion.id} xs={12} sm={6} md={4}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                            <CardActionArea onClick={() => navigate('/trabajador/induccion', {replace: false}) } disabled={!disponible} >
+                            <CardActionArea onClick={() => navigate(`/trabajador/induccion/${induccion.id}`, {replace: false}) } disabled={!disponible} >
                                 <CardMedia
                                     component="img"
                                     height="280"
@@ -131,9 +131,9 @@ export default function ViewTrabajadorDefault(){
                     let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
 
                     return (
-                        <Grid item key={'documentacion'} xs={12} sm={6} md={4}>
+                        <Grid item key={documentacion.id} xs={12} sm={6} md={4}>
                         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                            <CardActionArea onClick={() => navigate('/trabajador/documentacion', {replace: false}) } disabled={!disponible} >
+                            <CardActionArea onClick={() => navigate(`/trabajador/documentacion/${documentacion.id}`, {replace: false}) } disabled={!disponible} >
                                 <CardMedia
                                     component="img"
                                     height="280"
