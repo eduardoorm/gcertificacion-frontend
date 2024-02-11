@@ -1,26 +1,25 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Logout } from '@mui/icons-material';
 import Drawer from '@mui/material/Drawer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Avatar,Container, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useSignOut } from 'react-auth-kit'
-import { AdminListItems, TrabajadorListItems, EmpresaListItems } from './listItems';
 import { TIPO_USUARIO, UserAuthenticated } from '../../interfaces/entities';
 import { RootState, setUserAuthenticated, useAppDispatch, useAppSelector } from '../../store';
 import brand from '../../assets/images/brand.jpg';
 import MenuCerrarSesion from '../../components/Util/MenuCerrarSesion/MenuCerrarSesion';
 import MenuPersistent from '../../components/Util/MenuCerrarSesion/MenuPersintent/MenuPersistent';
+import MenuPermanente from '../../components/Util/MenuPermanente/MenuPermanente';
+import { useMediaQuery, useTheme } from '@mui/material';
+
+
 const initialStateUserAuthenticated: UserAuthenticated = {
     id_trabajador: 0,
     nombres: '',
@@ -31,6 +30,7 @@ const initialStateUserAuthenticated: UserAuthenticated = {
     tokenType: 'Bearer',
     recargar_lista_clientes: true,
 }
+
 
 const drawerWidth: number = 240;
 
@@ -96,6 +96,9 @@ export default function MainLayout() {
     const signOut = useSignOut()
     const dispatch = useAppDispatch();
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Verifica si la pantalla es móvil (tamaño pequeño)
+    
 
     const logout = () => {
         handleClose();
@@ -153,8 +156,16 @@ export default function MainLayout() {
                 </Toolbar>
             </AppBar>
 
+
             {/*Es el menu completo de la izquierda*/}
-             <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated}/>
+
+            {isMobile ? (
+                            <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
+
+            ) : (
+                <MenuPermanente openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
+
+            )}
 
             {/*La caja que va a contener el cotenido que se muestra cada que seleccionamos una opción */}
             <Main open={open}
