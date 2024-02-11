@@ -512,7 +512,7 @@ export default function AdminPeriodoIDView() {
                             disableRipple
                         >
                             <MenuBookIcon />
-                            Inducci&oacute;n
+                            Inducci&oacute;
                         </MenuItem>
                         <MenuItem
                             onClick={() =>

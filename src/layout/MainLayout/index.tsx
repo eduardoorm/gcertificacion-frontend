@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Logout } from '@mui/icons-material';
+import Drawer from '@mui/material/Drawer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Avatar,Container, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import { useSignOut } from 'react-auth-kit'
@@ -18,7 +19,7 @@ import { AdminListItems, TrabajadorListItems, EmpresaListItems } from './listIte
 import { TIPO_USUARIO, UserAuthenticated } from '../../interfaces/entities';
 import { RootState, setUserAuthenticated, useAppDispatch, useAppSelector } from '../../store';
 import brand from '../../assets/images/brand.jpg';
-
+import MenuCerrarSesion from '../../components/Util/MenuCerrarSesion/MenuCerrarSesion';
 const initialStateUserAuthenticated: UserAuthenticated = {
     id_trabajador: 0,
     nombres: '',
@@ -37,48 +38,52 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+    shouldForwardProp: (prop) => prop !== "open",
+  })<AppBarProps>(({ theme, open }) => ({
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: `${drawerWidth}px`,
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     }),
-}));
+  }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+  }));
+  
+
+  const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+    open?: boolean;
+  }>(({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
     }),
-);
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }));
+
 
 
 export default function MainLayout() {
@@ -112,7 +117,7 @@ export default function MainLayout() {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <AppBar position="absolute" open={openAppBar}>
+            <AppBar position="fixed" open={openAppBar}>
                 <Toolbar
                     sx={{
                         pr: '24px', // keep right padding when drawer closed
@@ -143,66 +148,35 @@ export default function MainLayout() {
                     >
                         <Avatar sx={{ width: 32, height: 32 }}>{userAuthenticated.nombres.charAt(0).toUpperCase()}</Avatar>
                     </IconButton>
-                    <Menu
-                        anchorEl={anchorEl}
-                        id="account-menu"
-                        open={open}
-                        onClose={handleClose}
-                        onClick={handleClose}
-                        PaperProps={{
-                            elevation: 0,
-                            sx: {
-                                overflow: 'visible',
-                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                mt: 1.5,
-                                '& .MuiAvatar-root': {
-                                    width: 32,
-                                    height: 32,
-                                    ml: -0.5,
-                                    mr: 1,
-                                },
-                                '&:before': {
-                                    content: '""',
-                                    display: 'block',
-                                    position: 'absolute',
-                                    top: 0,
-                                    right: 14,
-                                    width: 10,
-                                    height: 10,
-                                    bgcolor: 'background.paper',
-                                    transform: 'translateY(-50%) rotate(45deg)',
-                                    zIndex: 0,
-                                },
-                            },
-                        }}
-                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                    >
-                        <MenuItem onClick={logout}>
-                            <ListItemIcon>
-                                <Logout fontSize="small" />
-                            </ListItemIcon>
-                            Cerrar sesi&oacute;n
-                        </MenuItem>
-                    </Menu>
+                    <MenuCerrarSesion anchorEl={anchorEl} open={open} handleClose={handleClose} logout={logout}/>
                 </Toolbar>
             </AppBar>
-            <Drawer variant="permanent" open={openAppBar}>
-                <Toolbar
+
+            {/*Es el menu completo de la izquierda*/}
+            <Drawer 
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'flex-end',
-                      px: [1],
-                    }}
-                >
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        "& .MuiDrawer-paper": {
+                          width: drawerWidth,
+                          boxSizing: "border-box",
+                        },
+                      }}
+            variant="persistent"
+            anchor="left"
+            open={openAppBar}>
+                {/*Ecabezado Menú*/}          
+                <DrawerHeader>
                     <img src={brand} alt="Global Certificación" width={'75%'} />
                     <IconButton onClick={toggleDrawer}>
                         <ChevronLeftIcon />
                     </IconButton>
-                </Toolbar>
+                </DrawerHeader>
+                
                 <Divider />
-                <List component="nav">
+                 {/*Lista Items Menú en caso sea ADMIN, TRABAJADOR O EMPRESA*/} 
+                 {openAppBar &&         
+                <List>
                     {userAuthenticated.tipo === TIPO_USUARIO.ADMIN && 
                     <AdminListItems/>}
                     {userAuthenticated.tipo === TIPO_USUARIO.ADMIN && 
@@ -214,9 +188,12 @@ export default function MainLayout() {
                     {userAuthenticated.tipo === TIPO_USUARIO.EMPRESA && 
                     <EmpresaListItems/>}
                 </List>
+                    
+                    }
             </Drawer>
-            <Box
-                component="main"
+
+            {/*La caja que va a contener el cotenido que se muestra cada que seleccionamos una opción */}
+            <Main open={open}
                 sx={{
                     backgroundColor: (theme) =>
                     theme.palette.mode === 'light'
@@ -227,11 +204,12 @@ export default function MainLayout() {
                     overflow: 'auto',
                 }}
             >
+                <DrawerHeader />
                 <Toolbar />
                 <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
                     <Outlet />
                 </Container>
-            </Box>
+            </Main>
         </Box>
     );
 }

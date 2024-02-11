@@ -1,0 +1,104 @@
+
+
+@media only screen and (max-width: 1024px) {
+    .css-xoykoi,
+    .css-1q04urf,
+    .css-1xhj18k {
+        display: grid !important;
+    }
+
+    .css-1m5f78l {
+        justify-content: flex-start !important;
+    }
+    .css-xs0j84 {
+        width: 100% !important;
+    }
+    .css-179x4hi {
+        display: block;
+    }
+    .css-1fqw99a {
+        display: none;
+    }
+    .react-player {
+        width: 350px;
+        height: 200px;
+    }
+    .css-zq6grw {
+        text-align: center !important;
+    }
+
+    .css-wysxk4 {
+        transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,
+            margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms !important;
+        margin-left: 240px !important;
+        width: calc(100% - 240px) !important;
+    }
+
+    .MuiDrawer-root.MuiDrawer-docked {
+        position: absolute !important;
+        height: 100% !important;
+    }
+
+    .css-18anmv3 {
+        padding: 0 10% !important;
+    }
+
+    .MuiPaper-root.MuiPaper-elevation
+        .MuiGrid-root
+        .MuiGrid-root.MuiGrid-item
+        img {
+        width: 100%;
+    }
+
+    .css-8atqhb .css-o0rlmm img {
+        width: 100px;
+        border-radius: 50px !important;
+    }
+
+    .MuiCollapse-wrapper .MuiBox-root button {
+        width: 100% !important;
+    }
+    .css-1thvvpg {
+        display: none !important;
+    }
+
+    .MuiGrid-root.MuiGrid-container {
+        align-items: center;
+    }
+    .css-1jaw3da {
+        margin: 10px 0 !important;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .css-1vr91td .MuiDrawer-paper {
+        width: 240px !important;
+    }
+    button.MuiButtonBase-root.MuiCardActionArea-root {
+        display: flex;
+    }
+    .MuiPaper-root.MuiPaper-elevation
+        .MuiGrid-root
+        .MuiGrid-root.MuiGrid-item
+        img {
+        height: auto;
+        width: 40% !important;
+    }
+
+    .MuiContainer-root
+        div.MuiBox-root
+        .MuiGrid-root.MuiGrid-container.css-1c6mnks
+        div:nth-child(1) {
+        max-width: 30% !important;
+    }
+    .MuiContainer-root
+        div.MuiBox-root
+        .MuiGrid-root.MuiGrid-container.css-1c6mnks
+        div:nth-child(2) {
+        max-width: 70% !important;
+    }
+
+    .MuiTypography-root.MuiTypography-h4 {
+        font-size: 1.125rem !important;
+    }
+}

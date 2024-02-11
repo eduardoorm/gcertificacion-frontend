@@ -8,7 +8,7 @@ export default function HeaderTrabajadorView() {
     return (
         <Box sx={{ width: '100%' }}>
             <Grid container spacing={2} sx={{mb:3}}>
-                <Grid item xs={2}>
+                <Grid item xs={12} sm={2}>
                 {userAuthenticated.logo && 
                     <img 
                         src={userAuthenticated.logo} 
@@ -18,7 +18,7 @@ export default function HeaderTrabajadorView() {
                         }} 
                         width={'144px'} />}
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={12} sm={10}>
                     <Typography variant="h4">
                         {userAuthenticated.razon_social}
                     </Typography>
