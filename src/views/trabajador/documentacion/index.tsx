@@ -16,7 +16,7 @@ import { Archivo, Clase, DECLARACION_JURADA_ACEPTADA, ARCHIVO_DESCARGADO, TIPO_C
 import { Alert, Button, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Tooltip } from "@mui/material";
 import { acceptDeclaracionJurada, getDeclaracionesJuradasByTrabajador, marcarArchivoDescargado } from "../../../store/slices/archivoTrabajador";
 import moment from "moment";
-import HeaderTrabajadorView from "../header";
+import HeaderTrabajadorView from "../../header/header";
 
 const initialStateClase: Clase = {
     id: 0,

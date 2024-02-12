@@ -43,7 +43,7 @@ const MenuCerrarSesion = ({anchorEl,open,handleClose,logout}) => {
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>
-                Cerrar sesi&oacute;nss
+                Cerrar sesi&oacute;n
             </MenuItem>
         </Menu>
   )

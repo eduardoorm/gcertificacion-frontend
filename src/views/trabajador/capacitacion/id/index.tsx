@@ -42,7 +42,7 @@ import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import '../../../../assets/css/embla.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
-import HeaderTrabajadorView from '../../header';
+import HeaderTrabajadorView from '../../../header/header';
 
 const messageNoQuestions = 'No hay preguntas disponibles, comuníquese con el administrador';
 

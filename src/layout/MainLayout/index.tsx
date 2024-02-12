@@ -62,6 +62,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
+    height:800,
+    border:"1px solid",
     justifyContent: "flex-end",
   }));
   
@@ -173,9 +175,8 @@ export default function MainLayout() {
                  overflow: 'auto',
              }}
          >
-             <DrawerHeader />
-             <Toolbar />
-             <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
+            
+             <Container maxWidth="xl" sx={{ mt: 7, mb: 4, }}>
                  <Outlet />
              </Container>
          </Main>
@@ -195,18 +196,13 @@ export default function MainLayout() {
                  overflow: 'auto',
              }}
          >
-             <DrawerHeader />
-             <Toolbar />
-             <Container maxWidth="xl" sx={{ mt: 4, mb: 4, }}>
+            
+             <Container maxWidth="xl" sx={{ mt:13, mb: 4, }}>
                  <Outlet />
              </Container>
          </Box>
          </>
             )}
-
-            {/*La caja que va a contener el cotenido que se muestra cada que seleccionamos una opción */}
-            {/*Main open ={open} para que se sobreponga el menu */}
-            
         </Box>
     );
 }

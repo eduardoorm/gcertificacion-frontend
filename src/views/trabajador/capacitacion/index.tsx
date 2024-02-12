@@ -12,7 +12,7 @@ import { Clase, TIPO_CLASE, Trabajador } from "../../../interfaces/entities";
 import { RootState, getClasesByTrabajador, useAppDispatch, useAppSelector } from "../../../store";
 import { useAPIData } from "../../../api/useAPIData";
 import { useAuthUser } from 'react-auth-kit'
-import HeaderTrabajadorView from "../header";
+import HeaderTrabajadorView from "../../header/header";
 import moment from "moment";
 
 export default function ViewCapacitacionDefault(){

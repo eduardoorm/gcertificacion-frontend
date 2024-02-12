@@ -1,30 +1,29 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { RootState, useAppSelector } from "../../store";
+import "../header/header.css"
 
 export default function HeaderTrabajadorView() {
     const userAuthenticated = useAppSelector((state:RootState) => state.usuarios.userAuthenticated);
-    
+
     return (
         <Box sx={{ width: '100%' }}>
-            <Grid container spacing={2} sx={{mb:3}}>
-                <Grid item xs={12} sm={2}>
+            <Grid container  sx={{mb:3, display:"flex", flexWrap:"wrap", flexDirection:{xs:"column",md:"row"}, justifyContent:"space-around", alignItems:"center"}}>
+                <Grid item xs={3} sm={2}  className="containerImgHeader" >
                 {userAuthenticated.logo && 
                     <img 
+                        className="imgHeader"
                         src={userAuthenticated.logo} 
                         alt={userAuthenticated.razon_social}
-                        style={{
-                            marginRight: '1rem'
-                        }} 
-                        width={'144px'} />}
+                       />}
                 </Grid>
-                <Grid item xs={12} sm={10}>
-                    <Typography variant="h4">
+                <Grid item xs={8} sm={9} className="containerTextHeader" >
+                    <p className="titleHeader">
                         {userAuthenticated.razon_social}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    </p>
+                    <p className="rucHeader">
                         RUC: {userAuthenticated.ruc}
-                    </Typography>
+                    </p>
                 </Grid>
             </Grid>
         </Box>
