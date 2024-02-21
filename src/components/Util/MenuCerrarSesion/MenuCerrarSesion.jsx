@@ -50,3 +50,4 @@ const MenuCerrarSesion = ({anchorEl,open,handleClose,logout}) => {
 }
 
 export default MenuCerrarSesion
+

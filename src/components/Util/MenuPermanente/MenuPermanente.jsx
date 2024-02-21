@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Divider, Toolbar } from "@mui/material";
+import { AppBar, Divider, Toolbar } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 import { TIPO_USUARIO } from '../../../interfaces/entities';
 import MuiDrawer from '@mui/material/Drawer';
 
-const MenuPermanente = ({openAppBar,brand,toggleDrawer,userAuthenticated})=> {
+const MenuPermanente = ({openAppBar,brand,toggleDrawer,userAuthenticated}) => {
 
 const drawerWidth= 240;
 
@@ -39,8 +39,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+
+
   return (
-    <Drawer variant="permanent" open={openAppBar}>
+        <>
+            <Drawer variant="permanent" open={openAppBar}>
                 <Toolbar
                     sx={{
                       display: 'flex',
@@ -68,6 +71,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
                     <EmpresaListItems/>}
                 </List>
             </Drawer>
+        </>
   )
 }
 

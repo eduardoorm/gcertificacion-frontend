@@ -41,15 +41,16 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
   })<AppBarProps>(({ theme, open }) => ({
-    transition: theme.transitions.create(["margin", "width"], {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
+      marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: `${drawerWidth}px`,
-      transition: theme.transitions.create(["margin", "width"], {
-        easing: theme.transitions.easing.easeOut,
+      transition: theme.transitions.create(["width", "margin"], {
+        easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
     }),
@@ -91,6 +92,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function MainLayout() {
     const [ openAppBar, setOpenAppBar ] = React.useState(true);
+    const [ openAppBarMobile, setOpenAppBarMobile ] = React.useState(false);
+
     const [ anchorEl, setAnchorEl ] = React.useState<null | HTMLElement>(null);
     const userAuthenticated = useAppSelector((state:RootState) => state.usuarios.userAuthenticated);
     const open = Boolean(anchorEl);
@@ -99,8 +102,25 @@ export default function MainLayout() {
     const dispatch = useAppDispatch();
 
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Verifica si la pantalla es móvil (tamaño pequeño)
-    
+    const isMobile = useMediaQuery('(max-width: 1030px)');    
+    const [auth, setAuth] = React.useState(true);
+
+    const toggleDrawerMobile = () => {
+        setOpenAppBarMobile(!openAppBarMobile);
+    };
+
+        const toggleDrawer = () => {
+        setOpenAppBar(!openAppBar);
+    };
+
+    React.useEffect(() => {
+        if (isMobile) {
+          setOpenAppBar(false);
+        } else {
+          setOpenAppBar(true);
+        }
+      }, [isMobile]);
+      
 
     const logout = () => {
         handleClose();
@@ -110,13 +130,16 @@ export default function MainLayout() {
         localStorage.removeItem('token');
         navigate('/login', {replace: false});
     }
-    const toggleDrawer = () => {
-        setOpenAppBar(!openAppBar);
-    };
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setAuth(event.target.checked);
+      };
+
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -141,20 +164,27 @@ export default function MainLayout() {
                     >
                         <MenuIcon />
                     </IconButton>
+
                     <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
                         Hola {userAuthenticated.nombres} {userAuthenticated.apellidos}
                     </Typography>
+
+                    <div>
                     <IconButton
-                        onClick={handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
-                        aria-controls={openAppBar ? 'account-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={openAppBar ? 'true' : undefined}
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
                     >
                         <Avatar sx={{ width: 32, height: 32 }}>{userAuthenticated.nombres.charAt(0).toUpperCase()}</Avatar>
                     </IconButton>
+
                     <MenuCerrarSesion anchorEl={anchorEl} open={open} handleClose={handleClose} logout={logout}/>
+               
+                </div>
+               
                 </Toolbar>
             </AppBar>
 
@@ -163,8 +193,8 @@ export default function MainLayout() {
 
             {isMobile ? (
                 <>
-             <MenuPersistent openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
-             <Main open={open}
+             <MenuPersistent openAppBar={openAppBarMobile} brand={brand} toggleDrawer={toggleDrawerMobile} userAuthenticated={userAuthenticated} />
+             <Main
              sx={{
                  backgroundColor: (theme) =>
                  theme.palette.mode === 'light'

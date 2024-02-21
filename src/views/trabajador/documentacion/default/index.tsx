@@ -14,6 +14,7 @@ import { useAPIData } from "../../../../api/useAPIData";
 import { useAuthUser } from 'react-auth-kit'
 import HeaderTrabajadorView from "../../../header/header";
 import moment from "moment";
+import CardClassWorker from "../../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
 
 export default function ViewDocumentacionDefault () {
     const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
@@ -37,46 +38,39 @@ export default function ViewDocumentacionDefault () {
         onPending: () => {
         }
     }), [clasesReducer]));
+
+
+    const dataDocumentacion = (documentaciones: Clase[])=>{
+        return documentaciones.map((documentacion)=>{
+            let disponible = moment().isAfter(moment(documentacion.fecha_inicio), "minutes") &&
+                            moment().isBefore(moment(documentacion.fecha_fin), "minutes");
+            return (
+                <Grid
+                    display={"flex"}
+                    alignItems={"stretch"}
+                    item
+                    key={documentacion.id}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                >
+                    <CardClassWorker
+                        classWorker={documentacion}
+                        disponible={disponible}
+                    />
+                </Grid>
+            );
+
+        })
+    }
+
   return (
     <Box component="main" sx={{width: '100%', }}>
             <HeaderTrabajadorView />
 
             <Paper sx={{width: '100%', p:2}}>
                 <Grid container spacing={4} justifyContent={'center'}>
-                {documentaciones.map(documentacion => {
-                    let fecha_inicio = moment(documentacion.fecha_inicio);
-                    let fecha_fin = moment(documentacion.fecha_fin);
-                    let fecha_actual = moment();
-
-                    let disponible = fecha_actual.isAfter(fecha_inicio, 'minutes') && fecha_actual.isBefore(fecha_fin, 'minutes');
-
-                    return (
-                        <Grid item key={documentacion.id} xs={12} sm={6} md={4}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                            <CardActionArea onClick={() => navigate(`/trabajador/documentacion/${documentacion.id}`, {replace: false}) } disabled={!disponible} >
-                                <CardMedia
-                                    component="img"
-                                    height="280"
-                                    sx={{width: 'fit-content'}}
-                                    image={documentacion.imagen}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        {documentacion.titulo}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {documentacion.descripcion}
-                                    </Typography>
-                                    {!disponible &&
-                                    <Typography variant="body2" color="text.secondary">
-                                        Disponible desde: {fecha_inicio.format('DD/MM/YYYY')}
-                                    </Typography>}
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                    )
-                })}
+                    {dataDocumentacion(documentaciones)}
                 </Grid>
             </Paper>
         </Box>

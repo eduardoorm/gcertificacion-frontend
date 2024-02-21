@@ -468,12 +468,14 @@ export default function ViewTrabajadorCapacitacion() {
                             </div>
                         </div>
                         <MobileStepper
+                            className='containerBtnNextAndAfter'
                             variant="progress"
                             steps={preguntas.length}
                             position="static"
                             activeStep={activeStepPregunta}
                             nextButton={
                                 <Button
+                                    className='btnQuestion'
                                     size="small"
                                     onClick={scrollNext}
                                     disabled={!nextBtnEnabled}
@@ -483,7 +485,7 @@ export default function ViewTrabajadorCapacitacion() {
                                 </Button>
                             }
                             backButton={
-                                <Button size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
+                                <Button   className='btnQuestion'  size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
                                     <KeyboardArrowLeft />
                                     Anterior
                                 </Button>

@@ -1,12 +1,14 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
+import '../CardClassInfoWorker/CardClassInfoWorker.css'
 import React from "react";
 
 const CardClassInfoWorker = ({ image, classWorker, disponible }) => {
     return (
         <>
             <CardMedia
+                className="cardClassInfoWorkerMedia"
                 component="img"
-                sx={{ width: "100%",height:"70%"}}
+                sx={{ width: "100%",height:"250px", objectPosition:"top"}}
                 image={image}
             />
             <CardContent
