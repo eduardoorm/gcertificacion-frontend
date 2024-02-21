@@ -113,15 +113,6 @@ export default function MainLayout() {
         setOpenAppBar(!openAppBar);
     };
 
-    React.useEffect(() => {
-        if (isMobile) {
-          setOpenAppBar(false);
-        } else {
-          setOpenAppBar(true);
-        }
-      }, [isMobile]);
-      
-
     const logout = () => {
         handleClose();
         signOut();
@@ -146,6 +137,67 @@ export default function MainLayout() {
 
     return (
         <Box sx={{ display: 'flex' }}>
+        
+            {isMobile ? (
+                <>
+            <AppBar position="fixed" open={openAppBarMobile}>
+                <Toolbar
+                    sx={{
+                        pr: '24px', // keep right padding when drawer closed
+                    }}
+                >
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleDrawerMobile}
+                        sx={{
+                            marginRight: '36px',
+                            ...(openAppBarMobile && { display: 'none' }),
+                        }}
+                    >
+                    <MenuIcon />
+                    </IconButton>
+
+                    <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+                        Hola {userAuthenticated.nombres} {userAuthenticated.apellidos}
+                    </Typography>
+
+                    <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                    >
+                        <Avatar sx={{ width: 32, height: 32 }}>{userAuthenticated.nombres.charAt(0).toUpperCase()}</Avatar>
+                    </IconButton>
+
+                    <MenuCerrarSesion anchorEl={anchorEl} open={open} handleClose={handleClose} logout={logout}/>      
+                </Toolbar>
+            </AppBar>
+
+             <MenuPersistent openAppBar={openAppBarMobile} brand={brand} toggleDrawer={toggleDrawerMobile} userAuthenticated={userAuthenticated} />
+             <Main
+                sx={{
+                    backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],
+                    flexGrow: 1,
+                    height: '100vh',
+                    overflow: 'auto',
+                    }}
+                >            
+                <Container maxWidth="xl" sx={{ mt: 7, mb: 4, }}>
+                    <Outlet />
+                </Container>
+             </Main>
+         </>
+          
+            ) : (
+            <>
             <AppBar position="fixed" open={openAppBar}>
                 <Toolbar
                     sx={{
@@ -169,7 +221,6 @@ export default function MainLayout() {
                         Hola {userAuthenticated.nombres} {userAuthenticated.apellidos}
                     </Typography>
 
-                    <div>
                     <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -182,55 +233,26 @@ export default function MainLayout() {
                     </IconButton>
 
                     <MenuCerrarSesion anchorEl={anchorEl} open={open} handleClose={handleClose} logout={logout}/>
-               
-                </div>
-               
+                
                 </Toolbar>
             </AppBar>
-
-
-            {/*Es el menu completo de la izquierda*/}
-
-            {isMobile ? (
-                <>
-             <MenuPersistent openAppBar={openAppBarMobile} brand={brand} toggleDrawer={toggleDrawerMobile} userAuthenticated={userAuthenticated} />
-             <Main
-             sx={{
-                 backgroundColor: (theme) =>
-                 theme.palette.mode === 'light'
-                     ? theme.palette.grey[100]
-                     : theme.palette.grey[900],
-                 flexGrow: 1,
-                 height: '100vh',
-                 overflow: 'auto',
-             }}
-         >
-            
-             <Container maxWidth="xl" sx={{ mt: 7, mb: 4, }}>
-                 <Outlet />
-             </Container>
-         </Main>
-         </>
-          
-            ) : (
-                <>
              <MenuPermanente openAppBar={openAppBar} brand={brand} toggleDrawer={toggleDrawer} userAuthenticated={userAuthenticated} />
              <Box 
-             sx={{
-                 backgroundColor: (theme) =>
-                 theme.palette.mode === 'light'
-                     ? theme.palette.grey[100]
-                     : theme.palette.grey[900],
-                 flexGrow: 1,
-                 height: '100vh',
-                 overflow: 'auto',
-             }}
-         >
+                sx={{
+                    backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],
+                    flexGrow: 1,
+                    height: '100vh',
+                    overflow: 'auto',
+                }}
+            >
             
-             <Container maxWidth="xl" sx={{ mt:13, mb: 4, }}>
-                 <Outlet />
-             </Container>
-         </Box>
+                <Container maxWidth="xl" sx={{ mt:13, mb: 4, }}>
+                    <Outlet />
+                </Container>
+            </Box>
          </>
             )}
         </Box>
