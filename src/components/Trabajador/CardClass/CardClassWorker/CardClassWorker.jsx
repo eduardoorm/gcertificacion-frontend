@@ -4,10 +4,9 @@ import Image from "../../../../assets/images/test.png";
 import CardClassInfoWorker from "../CardClassInfoWorker/CardClassInfoWorker";
 import { useNavigate } from "react-router-dom";
 import '../CardClassWorker/CardClassWorker.css'
-const CardClassWorker = ({ classWorker, disponible }) => {
+const CardClassWorker = ({ classWorker, disponible, fechaInicio }) => {
     const navigate = useNavigate();
     const destinationPath = `/trabajador/${classWorker.tipo}/${classWorker.id}`;
-
     return (
         <Card sx={{ border: "0px solid"}} className="cardClassWorker">
             <CardActionArea
@@ -26,6 +25,7 @@ const CardClassWorker = ({ classWorker, disponible }) => {
                     image={classWorker.imagen}
                     classWorker={classWorker}
                     disponible={disponible}
+                    fechaInicio={fechaInicio}
                 />
             </CardActionArea>
         </Card>

@@ -1,7 +1,7 @@
 {
   "name": "gcertificacion-lab",
   "version": "1.0.0",
-  "homepage": "https://lab.gcertificacion.pe",
+  "homepage": "http://labtest.gcertificacion.pe/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",

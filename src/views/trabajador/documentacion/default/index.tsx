@@ -57,6 +57,7 @@ export default function ViewDocumentacionDefault () {
                     <CardClassWorker
                         classWorker={documentacion}
                         disponible={disponible}
+                        fechaInicio={documentacion.fecha_inicio}
                     />
                 </Grid>
             );

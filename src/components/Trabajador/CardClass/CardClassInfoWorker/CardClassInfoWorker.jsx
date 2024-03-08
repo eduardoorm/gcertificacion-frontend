@@ -1,8 +1,9 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import '../CardClassInfoWorker/CardClassInfoWorker.css'
 import React from "react";
+import moment from "moment";
 
-const CardClassInfoWorker = ({ image, classWorker, disponible }) => {
+const CardClassInfoWorker = ({ image, classWorker, disponible, fechaInicio }) => {
     return (
         <>
             <CardMedia
@@ -34,7 +35,7 @@ const CardClassInfoWorker = ({ image, classWorker, disponible }) => {
                     <Typography 
                     variant="body2" 
                     color="text.secondary">
-                        Disponible desde: {fecha_inicio.format("DD/MM/YYYY")}
+                        Disponible desde: {moment(fechaInicio).format("DD/MM/YYYY")}
                     </Typography>
                 )}
             </CardContent>

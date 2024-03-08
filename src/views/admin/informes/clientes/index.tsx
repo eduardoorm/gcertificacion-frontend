@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactECharts, { EChartsInstance } from 'echarts-for-react';
 import { useNavigate, useParams } from "react-router-dom";
 import { Alert, AlertColor, Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, Snackbar, Tab, Tabs, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { RootState, getArchivosByClase, getClasesByEmpresa, selectEmpresaClienteById, useAppDispatch, useAppSelector } from "../../../../store";
+import { RootState, getArchivos, getArchivosByClase, getClasesByEmpresa, selectEmpresaClienteById, useAppDispatch, useAppSelector } from "../../../../store";
 import { useAPIData } from "../../../../api/useAPIData";
 import { CapacitacionSerie, DocumentacionSerie, InduccionSerie, ItemSerie } from "../../../../interfaces/report/series";
 import { getCapacitacionSerie } from "../../../../store";
@@ -76,6 +76,8 @@ export default function AdminInformesClientesView(){
     const [idClase, setIdClase] = React.useState('');
     const [idArchivo, setIdArchivo] = React.useState('');
     const [eChartRef, setEChartRef] = React.useState<any>(null);
+    const [handleChangeSelectArchivo, setHandleChangeSelectArchivo] = React.useState(true);
+
     const [value, setValue] = React.useState(0);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -87,16 +89,16 @@ export default function AdminInformesClientesView(){
         //dispatch(getCapacitacionSerie(id || '0'));
         //dispatch(getDocumentacionSerie(id || '0'));
         dispatch(getClasesByEmpresa(id || '0'));
-    }, []);
+    }, []); 
 
     React.useEffect(() => {
         if(idClase !== '' && idClase !== '0') {
             dispatch(getCapacitacionSerie(idClase));
-        }
+                    }
         else {
             setOptionsAvanceCapacitacion(InitialPieOptions);
             setOptionsAvanceAreaCapacitacion(InitialBarOptions);
-        }
+                    }
     }, [idClase]);
 
     React.useEffect(() => {
@@ -196,7 +198,7 @@ export default function AdminInformesClientesView(){
             let c = data.find(clase => clase.tipo === TIPO_CLASE.DOCUMENTACION);
             if(c) {
                 setDocumentacion(c);
-                dispatch(getArchivosByClase('' +c.id));
+                //dispatch(getArchivosByClase('' +c.id));
             }
         },
         onRejected: (error) => {
@@ -215,6 +217,7 @@ export default function AdminInformesClientesView(){
         }
     }), [clasesReducer]));
 
+
     useAPIData(archivosReducer, React.useMemo(() => ({
         onFulfilled: (data: Archivo[]) => {
             setArchivos(data);
@@ -227,6 +230,7 @@ export default function AdminInformesClientesView(){
         },
         onPending: () => {}
     }), [archivosReducer]));
+
 
     const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -281,6 +285,9 @@ export default function AdminInformesClientesView(){
 
     const handleClaseChange = (event: SelectChangeEvent) => {
         setIdClase(event.target.value);
+        dispatch(getArchivosByClase('' + event.target.value));
+        setHandleChangeSelectArchivo(false)
+        setIdArchivo('0');
     }
 
     const handleArchivoChange = (event: SelectChangeEvent) => {
@@ -366,9 +373,11 @@ export default function AdminInformesClientesView(){
                                     onChange={handleClaseChange}
                                     size="medium"
                                 >
-                                    <MenuItem key="-1" value="">
+
+                                    <MenuItem disabled key={-1} value="">
                                         <em>Seleccione</em>
                                     </MenuItem>
+                                                                        
                                     {clases.map((clase) => (
                                         clase.tipo === TIPO_CLASE.CAPACITACION &&
                                         <MenuItem key={'capacitacion-'+clase.id} value={clase.id}>
@@ -430,9 +439,35 @@ export default function AdminInformesClientesView(){
                         sx={{ mt: 3, mb: 2, }}
                     >
                         <Grid item xs={8}>
-                            <FormControl fullWidth>
-                                <InputLabel id="select-archivo-label">{documentacion.id ? documentacion.titulo : 'Archivo'}</InputLabel>
+                            
+                        <FormControl fullWidth sx={{ '& .css-14lo706': { paddingLeft: '8px' } }}>
+                                <InputLabel  id="select-clase-label">{'Carpeta'}</InputLabel>
                                 <Select
+                                    required
+                                    labelId="select-clase-label"
+                                    id="clase"
+                                    name="clase"
+                                    value={idClase}
+                                    label={documentacion.id ? documentacion.titulo : 'Archivo'}
+                                    onChange={handleClaseChange}
+                                    size="medium"
+                                >
+                                    <MenuItem disabled key={-1} value="">
+                                        <em>Seleccione</em>
+                                    </MenuItem>
+                                    {clases.map((clase) => (
+                                        clase.tipo === TIPO_CLASE.DOCUMENTACION &&
+                                        <MenuItem key={'documentacion-'+clase.id} value={clase.id}>
+                                            {clase.titulo}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                                </FormControl>
+
+                            <FormControl fullWidth margin="normal" sx={{ '& .css-14lo706': { paddingLeft: '85px' } }}>
+                                <InputLabel  id="select-archivo-label">{'Seleccione un archivo'}</InputLabel>
+                                <Select
+                                    disabled={handleChangeSelectArchivo}
                                     required
                                     labelId="select-archivo-label"
                                     id="archivo"
@@ -442,8 +477,8 @@ export default function AdminInformesClientesView(){
                                     onChange={handleArchivoChange}
                                     size="medium"
                                 >
-                                    <MenuItem key={0} value="">
-                                        <em>Seleccione</em>
+                                    <MenuItem disabled key={-1} value="">
+                                        <em>Seleccione un archivo</em>
                                     </MenuItem>
                                     {archivos.map((archivo) => (
                                         <MenuItem key={'archivo-'+archivo.id} value={archivo.id}>
@@ -452,6 +487,7 @@ export default function AdminInformesClientesView(){
                                     ))}
                                 </Select>
                             </FormControl>
+
                         </Grid>
                         <Grid item xs={4} display={"flex"} justifyContent={"flex-end"}>
                             <Button 
@@ -462,7 +498,7 @@ export default function AdminInformesClientesView(){
                                 href={`${config.baseUrl}/informe/documentacion/${idArchivo}`} 
                                 target="_blank" 
                                 rel="noreferrer"
-                                disabled={idArchivo === ''}
+                                disabled={(idArchivo === '' || idArchivo == '0')}
                             >
                                 Descargar informe
                             </Button>

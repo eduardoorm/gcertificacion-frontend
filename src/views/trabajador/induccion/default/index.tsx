@@ -57,6 +57,7 @@ export default function ViewInduccionDefault() {
                     <CardClassWorker
                         classWorker={induccion}
                         disponible={disponible}
+                        fechaInicio={induccion.fecha_inicio}
                     />
                 </Grid>
             );

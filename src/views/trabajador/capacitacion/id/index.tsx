@@ -276,8 +276,6 @@ export default function ViewTrabajadorCapacitacion() {
         };
         dispatch(addExamenAzar(data));
     }
-
-
     return (
         <Box component="main">
             <HeaderTrabajadorView />

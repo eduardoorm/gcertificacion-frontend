@@ -52,6 +52,7 @@ export default function ViewCapacitacionDefault(){
                     <CardClassWorker
                         classWorker={capacitacion}
                         disponible={disponible}
+                        fechaInicio={capacitacion.fecha_inicio}
                     />
                 </Grid>
             );

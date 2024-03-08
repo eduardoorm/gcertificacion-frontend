@@ -66,6 +66,7 @@ export default function ViewTrabajadorDefault() {
                     <CardClassWorker
                         classWorker={classWorker}
                         disponible={disponible}
+                        fechaInicio={classWorker.fecha_inicio}
                     />
                 </Grid>
             );
