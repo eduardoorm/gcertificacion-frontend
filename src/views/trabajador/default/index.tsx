@@ -3,56 +3,64 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Clase, TIPO_CLASE } from "../../../interfaces/entities";
-import {RootState,getClasesByTrabajador,useAppDispatch,useAppSelector} from "../../../store";
-import { useAPIData } from "../../../api/useAPIData";
-import { useAuthUser } from "react-auth-kit";
 import HeaderTrabajadorView from "../../header/header";
-import moment from "moment";
 import CardClassWorker from "../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
+import imageSectionInduccion from '../../../assets/images/SectionInduccion.jpg'
+import imageSectionCapacitacion from '../../../assets/images/SectionCapacitacion.jpg'
+import imageSectionSistemaGestion from '../../../assets/images/SectionSistemaGestion.jpg'
 
 export default function ViewTrabajadorDefault() {
-    const { clases: clasesReducer } = useAppSelector(
-        (state: RootState) => state.clases
-    );
-    const [clases, setClases] = React.useState<Clase[]>([]);
-    const dispatch = useAppDispatch();
-    const auth = useAuthUser();
+    const sectionInduccion = {
+        id: 1,
+        id_periodo: 123,
+        titulo: "Inducción",
+        descripcion: "",
+        path: "induccion",
+        section: true,
+        tipo: TIPO_CLASE.INDUCCION,
+        fecha_inicio: "",
+        fecha_fin: "",
+        imagen: imageSectionInduccion,
+        archivos: [],
+        clases_trabajadores: undefined
+    };
 
-    React.useEffect(() => {
-        dispatch(getClasesByTrabajador(auth()?.id_trabajador || "0"));
-    }, []);
+    const sectionCapacitacion = {
+        id: 2,
+        id_periodo: 123,
+        titulo: "Capacitación",
+        path: "capacitacion",
+        descripcion: "",
+        section: true,
+        tipo: TIPO_CLASE.CAPACITACION,
+        fecha_inicio: "",
+        fecha_fin: "",
+        imagen: imageSectionCapacitacion,
+        archivos: [],
+        clases_trabajadores: undefined
+    };
 
-    useAPIData(
-        clasesReducer,
-        React.useMemo(
-            () => ({
-                onFulfilled: (data: Clase[]) => {
-                    setClases(data);
-                },
-                onRejected: (error) => {
-                    console.log(error);
-                },
-                onPending: () => {},
-            }),
-            [clasesReducer]
-        )
-    );
+    const sectionDocumentacion = {
+        id: 3,
+        id_periodo: 123,
+        titulo: "Sistema de Gestión de Seguridad y Salud en el Trabajo",
+        descripcion: "",
+        section: true,
+        path: "documentacion",
+        tipo: TIPO_CLASE.DOCUMENTACION,
+        fecha_inicio: "",
+        fecha_fin: "",
+        imagen: imageSectionSistemaGestion,
+        archivos: [],
+        clases_trabajadores: undefined
+    };
+    
 
-    const inducciones = clases.filter(
-        (clase) => clase.tipo === TIPO_CLASE.INDUCCION
-    );
-    const capacitaciones = clases.filter(
-        (clase) => clase.tipo === TIPO_CLASE.CAPACITACION
-    );
-    const documentaciones = clases.filter(
-        (clase) => clase.tipo === TIPO_CLASE.DOCUMENTACION
-    );
+    // Luego, agrupas estas clases en un array
+    const clasesArray = [sectionInduccion,sectionCapacitacion, sectionDocumentacion];
 
     const renderClases = (clases: Clase[]) => {
         return clases.map((classWorker) => {
-            let disponible =
-                moment().isAfter(moment(classWorker.fecha_inicio), "minutes") &&
-                moment().isBefore(moment(classWorker.fecha_fin), "minutes");
             return (
                 <Grid
                     display={"flex"}
@@ -65,22 +73,21 @@ export default function ViewTrabajadorDefault() {
                 >
                     <CardClassWorker
                         classWorker={classWorker}
-                        disponible={disponible}
-                        fechaInicio={classWorker.fecha_inicio}
+                        disponible={'null'}
+                        fechaInicio={null}
                     />
                 </Grid>
             );
         });
     };
+    
 
     return (
         <Box component="main" sx={{ width: "100%" }}>
             <HeaderTrabajadorView />
             <Paper sx={{ width: "100%", p: 2 }}>
                 <Grid container spacing={3}>
-                    {renderClases(inducciones)}
-                    {renderClases(capacitaciones)}
-                    {renderClases(documentaciones)}
+                    {renderClases(clasesArray)}     
                 </Grid>
             </Paper>
         </Box>

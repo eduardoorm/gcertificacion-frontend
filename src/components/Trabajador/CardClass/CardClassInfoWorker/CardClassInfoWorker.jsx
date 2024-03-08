@@ -4,6 +4,7 @@ import React from "react";
 import moment from "moment";
 
 const CardClassInfoWorker = ({ image, classWorker, disponible, fechaInicio }) => {
+
     return (
         <>
             <CardMedia
@@ -13,12 +14,13 @@ const CardClassInfoWorker = ({ image, classWorker, disponible, fechaInicio }) =>
                 image={image}
             />
             <CardContent
-                sx={{height:"30%"}}
+                sx={{height:"30%", width:"100%", textAlign:"center"}}
             >
-                <div>
+                <div >
                 <Typography 
                 gutterBottom 
                 variant="h5" 
+                
                 >
                     {classWorker.titulo}
                 </Typography>
