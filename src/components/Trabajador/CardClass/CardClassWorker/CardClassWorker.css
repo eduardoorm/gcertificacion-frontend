@@ -21,3 +21,8 @@
     /* Estilos para pantallas muy grandes */
  
 }
+
+/*agrega responsive en 400*/ 
+ @media screen and (min-width: 600px) and (max-width: 959px) {
+    /* Styles for medium devices */
+}

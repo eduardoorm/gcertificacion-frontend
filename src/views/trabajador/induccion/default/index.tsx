@@ -9,6 +9,9 @@ import { useAuthUser } from "react-auth-kit";
 import HeaderTrabajadorView from "../../../header/header";
 import moment from "moment";
 import CardClassWorker from "../../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import SignaturePad from 'react-signature-canvas';
 
 export default function ViewInduccionDefault() {
     const { clases: clasesReducer } = useAppSelector(
@@ -71,6 +74,10 @@ export default function ViewInduccionDefault() {
                     {dataInduccion(inducciones)}
                 </Grid>
             </Paper>
+            <Popup modal defaultOpen trigger={<button> Open Signtarure Pad</button>}>
+                <SignaturePad/>
+            </Popup>
+       
         </Box>
     );
 }
