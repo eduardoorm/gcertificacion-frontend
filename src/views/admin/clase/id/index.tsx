@@ -416,19 +416,44 @@ export default function AdminClaseIDView() {
     const authHeader = useAuthHeader();
 
     React.useEffect(() => {
-        uppyVideo.getPlugin('XHRUpload')?.setOptions({
-            headers:{
+        const uploadPlugin = uppyVideo.getPlugin('XHRUpload');
+        console.log("Holaaa")
+        if (!uploadPlugin) {
+            console.error('No se encontró el plugin de carga XHRUpload');
+            return;
+        }
+    
+        uploadPlugin.setOptions({
+            headers: {
                 Authorization: authHeader(),
             },
             validateStatus: (statusCode: number, responseText: string, response: any) => {
-                if (statusCode !== 200) {
+                try {
+                    if (statusCode !== 200) {
+                        console.log(`La carga falló con código de estado ${statusCode}`);
+                        return false;
+                    }
+    
+                    const responseData = JSON.parse(responseText);
+                    if (!responseData.data || !responseData.data[0] || !responseData.data[0].filename) {
+                        console.log('La respuesta de la carga no contiene la información esperada');
+                        return false;
+                    }
+    
+                    const filename = responseData.data[0].filename;
+                    setArchivo(prevArchivo => ({
+                        ...prevArchivo,
+                        url: `${config.baseUrl}${config.videoPath}/${filename}`
+                    }));
+
+                    console.log('Se subio correctamente el video:', filename);
+                    return true;
+                } catch (error) {
+                    console.log('Error al procesar la respuesta de la carga:', error);
                     return false;
                 }
-                let data = JSON.parse(responseText);
-                setArchivo({...archivo, url:`${config.baseUrl}${config.videoPath}/${data.data[0].filename}`})
-                return true;
             },
-        })
+        });
     }, [archivo]);
 
     React.useEffect(() => {
