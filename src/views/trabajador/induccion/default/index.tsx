@@ -68,16 +68,19 @@ export default function ViewInduccionDefault() {
     }
     return (
         <Box component="main" sx={{ width: "100%" }}>
-            <HeaderTrabajadorView />
+         <HeaderTrabajadorView />
             <Paper sx={{ width: "100%", p: 2 }}>
                 <Grid container spacing={3} justifyContent={"center"}>
                     {dataInduccion(inducciones)}
                 </Grid>
             </Paper>
-            <Popup modal defaultOpen trigger={<button> Open Signtarure Pad</button>}>
-                <SignaturePad/>
-            </Popup>
-       
+
+            
+            <form action="http://localhost:8080/api/videos/clases" method="post" encType="multipart/form-data">
+                <input type="file" name="video"/>
+                <input type="submit" value="Subir archivo"/>
+            </form>
+           
         </Box>
     );
 }
