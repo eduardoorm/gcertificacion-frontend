@@ -10,7 +10,7 @@ export interface Trabajador {
     area: string,
     puesto: string,
     sede: string,
-    fecha_nacimiento: string
+    fecha_nacimiento: string,
 }
 
 export interface TrabajadorConClases {

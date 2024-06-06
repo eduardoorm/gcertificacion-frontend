@@ -43,6 +43,7 @@ import '../../../../assets/css/embla.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import HeaderTrabajadorView from '../../../header/header';
+import { WhatsApp } from '@mui/icons-material';
 
 const messageNoQuestions = 'No hay preguntas disponibles, comuníquese con el administrador';
 
@@ -110,7 +111,9 @@ export default function ViewTrabajadorCapacitacion() {
     const onInit = React.useCallback((emblaApi: EmblaCarouselType) => {
       setScrollSnaps(emblaApi.scrollSnapList())
     }, []);
-  
+
+    console.log("clasess " + JSON.stringify(clase.archivos))
+
     const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
       setSelectedIndex(emblaApi.selectedScrollSnap())
       setPrevBtnEnabled(emblaApi.canScrollPrev())
@@ -130,7 +133,6 @@ export default function ViewTrabajadorCapacitacion() {
     React.useEffect(() => {
         dispatch(getClasesCapacitacionByTrabajador(auth()?.id_trabajador || '0'))
     }, []);
-    
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
             setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
@@ -138,6 +140,7 @@ export default function ViewTrabajadorCapacitacion() {
             if(data.filter(d => d.id === parseInt(id || '0'))[0] && data.filter(d => d.id === parseInt(id || '0'))[0].tipo === TIPO_CLASE.CAPACITACION) {
                 dispatch(getExamenAzarByClaseTrabajador(data.filter(d => d.id === parseInt(id || '0'))[0].clases_trabajadores?.id.toString() || '0'));
             }
+            let archivos = clase.archivos?.filter(item => item.tipo === 'video');
         },
         onRejected: (error) => {
             console.log(error);
@@ -359,6 +362,12 @@ export default function ViewTrabajadorCapacitacion() {
                     </StepLabel>
                     <StepContent>
                         <Typography sx={{my: 3}}>{clase.descripcion}</Typography>
+
+                        {
+
+                                
+                            
+                        }
                         <VideoPlayer url={clase.archivos?.filter(item => item.tipo === 'video')[0]?.url || ''} onEnded={handleFinish} />
                         <Box sx={{ my: 3, pt:2}}>
                             <div>

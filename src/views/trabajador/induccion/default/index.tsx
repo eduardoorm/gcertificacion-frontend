@@ -9,9 +9,8 @@ import { useAuthUser } from "react-auth-kit";
 import HeaderTrabajadorView from "../../../header/header";
 import moment from "moment";
 import CardClassWorker from "../../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import SignaturePad from 'react-signature-canvas';
+import { DigitalSignature } from "../../../../components/DigitalSignature";
 
 export default function ViewInduccionDefault() {
     const { clases: clasesReducer } = useAppSelector(
@@ -74,12 +73,8 @@ export default function ViewInduccionDefault() {
                     {dataInduccion(inducciones)}
                 </Grid>
             </Paper>
-
             
-            <form action="http://localhost:8080/api/videos/clases" method="post" encType="multipart/form-data">
-                <input type="file" name="video"/>
-                <input type="submit" value="Subir archivo"/>
-            </form>
+            <DigitalSignature  />
            
         </Box>
     );
