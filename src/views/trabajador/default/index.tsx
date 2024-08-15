@@ -90,6 +90,7 @@ export default function ViewTrabajadorDefault() {
                     {renderClases(clasesArray)}     
                 </Grid>
             </Paper>
+            
         </Box>
     );
 }

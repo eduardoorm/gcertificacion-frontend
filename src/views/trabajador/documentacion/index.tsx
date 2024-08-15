@@ -8,7 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import FileDownloadDoneIcon from '@mui/icons-material/FileDownloadDone';
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import { RootState, getClasesDocumentacionByTrabajador, useAppDispatch, useAppSelector } from "../../../store";
 import { useAPIData } from "../../../api/useAPIData";
@@ -58,7 +58,6 @@ export default function ViewTrabajadorDocumentacion(){
     const { archivosTrabajadores: declaracionesJuradasReducer } = useAppSelector((state:RootState) => state.archivosTrabajadores);
     const [declaracionesJuradas, setDeclaracionesJuradas] = React.useState<ArchivoTrabajador[]>([]);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const auth = useAuthUser();
     const { id } = useParams();
 

@@ -154,6 +154,7 @@ const uppyExcel = new Uppy({ id: 'uppyExcel', locale: es_PE, autoProceed: false,
     }}
 );
 
+
 const uppyImage = new Uppy({ id: 'uppyImage', locale: es_PE, autoProceed: false, debug: true, restrictions: {
     maxNumberOfFiles: 1,
     allowedFileTypes: ['image/*'],

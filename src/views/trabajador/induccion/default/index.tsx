@@ -2,8 +2,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Clase, TIPO_CLASE, Trabajador } from "../../../../interfaces/entities";
-import {RootState,getClasesByTrabajador,useAppDispatch,useAppSelector} from "../../../../store";
+import { Clase, TIPO_CLASE } from "../../../../interfaces/entities";
+import { RootState, getClasesByTrabajador, useAppDispatch, useAppSelector } from "../../../../store";
 import { useAPIData } from "../../../../api/useAPIData";
 import { useAuthUser } from "react-auth-kit";
 import HeaderTrabajadorView from "../../../header/header";
@@ -11,6 +11,21 @@ import moment from "moment";
 import CardClassWorker from "../../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
 import 'reactjs-popup/dist/index.css';
 import { DigitalSignature } from "../../../../components/DigitalSignature";
+import Modal from "@mui/material/Modal";
+import ModalSignature from "../../../../components/ModalSignature/ModalSignature";
+import { tieneFirma } from "../../../../util/getSignature";
+
+const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "60%",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    border: "none",
+    p: 4,
+};
 
 export default function ViewInduccionDefault() {
     const { clases: clasesReducer } = useAppSelector(
@@ -19,33 +34,41 @@ export default function ViewInduccionDefault() {
     const [inducciones, setInducciones] = React.useState<Clase[]>([]);
     const dispatch = useAppDispatch();
     const auth = useAuthUser();
+    const idTrabajador = auth()?.id_trabajador;
+    const handleClose = () => setHasSignature(false);
+    const [hasSignature, setHasSignature] = React.useState(false);
 
     React.useEffect(() => {
         dispatch(getClasesByTrabajador(auth()?.id_trabajador || "0"));
     }, []);
 
-    useAPIData(clasesReducer,React.useMemo(
-            () => ({
-                onFulfilled: (data: Clase[]) => {
-                    setInducciones(
-                        data.filter(
-                            (clase) => clase.tipo === TIPO_CLASE.INDUCCION
-                        )
-                    );
-                },
-                onRejected: (error) => {
-                    console.log(error);
-                },
-                onPending: () => {},
-            }),
-            [clasesReducer]
-        )
-    );
+    React.useEffect(() => {
+        if (idTrabajador) {
+            tieneFirma(idTrabajador).then(result => setHasSignature(!result));
+        }
+    }, [idTrabajador]);
 
-    const dataInduccion = (inducciones: Clase[])=>{
-        return inducciones.map((induccion)=>{
+    useAPIData(clasesReducer, React.useMemo(
+        () => ({
+            onFulfilled: (data: Clase[]) => {
+                setInducciones(
+                    data.filter(
+                        (clase) => clase.tipo === TIPO_CLASE.INDUCCION
+                    )
+                );
+            },
+            onRejected: (error) => {
+                console.log(error);
+            },
+            onPending: () => { },
+        }),
+        [clasesReducer]
+    ));
+
+    const dataInduccion = (inducciones: Clase[]) => {
+        return inducciones.map((induccion) => {
             let disponible = moment().isAfter(moment(induccion.fecha_inicio), "minutes") &&
-                            moment().isBefore(moment(induccion.fecha_fin), "minutes");
+                moment().isBefore(moment(induccion.fecha_fin), "minutes");
             return (
                 <Grid
                     display={"flex"}
@@ -65,16 +88,17 @@ export default function ViewInduccionDefault() {
             );
         })
     }
+
     return (
         <Box component="main" sx={{ width: "100%" }}>
-         <HeaderTrabajadorView />
+            <HeaderTrabajadorView />
             <Paper sx={{ width: "100%", p: 2 }}>
                 <Grid container spacing={3} justifyContent={"center"}>
                     {dataInduccion(inducciones)}
                 </Grid>
             </Paper>
-            
-            <DigitalSignature  />
+
+            <ModalSignature hasSignature={hasSignature} handleClose={handleClose} idTrabajador={idTrabajador} />
            
         </Box>
     );

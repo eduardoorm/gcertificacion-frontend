@@ -1,3 +1,13 @@
-.signature__worker{
-    border:1px solid,
+.btnClear{
+
+}
+
+.btnSave{
+    background-color: #402C70;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }

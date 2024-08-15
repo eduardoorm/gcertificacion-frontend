@@ -377,38 +377,53 @@ export default function ViewTrabajadorCapacitacion() {
                                 {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
                                 <>
                                 <Grid container spacing={2} 
-                                    sx={{m: 1, p: 2, backgroundColor: "#E7EBF0", borderRadius: 1}} 
-                                    direction={"row"} justifyContent={"flex-start"} alignContent={"center"} alignItems={"flex-start"}>
-                                    
+                                    sx={{ m: 1, p: 2, alignItems:"stretch" , flexWrap:"wrap" ,backgroundColor: "#E7EBF0", borderRadius: 1, display: 'flex', flexDirection: 'row' }} 
+                                    justifyContent={"flex-start"} alignContent={"center"}>
                                     {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
                                         return(
                                             <Grid item xs={6} key={archivo.id}>
-                                                <Card sx={{ display: 'flex' }}>
+                                                <Card sx={{ display: 'flex', flexWrap: 'wrap', height:'100%'}}>
                                                     <CardActionArea>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                                        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap:'wrap', justifyContent:'center' }}>
                                                             <CardMedia
                                                                 component="img"
                                                                 height="256"
                                                                 sx={{ objectFit: 'cover', maxWidth: '256px' }}
                                                                 image={archivo.imagen}
                                                             />
-                                                            <CardContent >
-                                                                <Typography component="div" variant="h5">
-                                                                    {archivo.titulo}
-                                                                </Typography>
-                                                                <Typography variant="subtitle2" color="text.secondary" component="div">
-                                                                    {archivo.descripcion}
-                                                                </Typography>
+                                                           <CardContent 
+                                                            sx={{
+                                                                display: 'flex', 
+                                                                flexWrap: 'wrap', 
+                                                                width: {
+                                                                    xs: '100%',
+                                                                    md: '60%',
+                                                                    '@media (max-width: 1404px)': {
+                                                                        width: '100%', 
+                                                                    }
+                                                                }
+                                                               }} 
+                                                            >
+                                                                    <CardContent sx={{display:'flex' , width:'100%'}} >
+                                                                        <Typography component="p" variant="h5" sx={{wordWrap:'break-word'}}>
+                                                                            {archivo.titulo}
+                                                                        </Typography> 
+                                                                        <a target="_blank" href={archivo.url}>
+                                                                            <IconButton>
+                                                                                <DownloadIcon />
+                                                                            </IconButton>
+                                                                        </a>
+                                                                    </CardContent>
+                                                                    <CardContent sx={{width:'100%'}}>
+                                                                        <Typography component="p" variant="body2" sx={{ wordWrap: 'break-word' }}>
+                                                                            {archivo.descripcion}
+                                                                        </Typography>
+                                                                    </CardContent>
                                                             </CardContent>
+
+
                                                         </Box>
                                                     </CardActionArea>
-                                                    <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pt: 1, flexDirection: 'column' }}>
-                                                        <a target="_blank" href={archivo.url}>
-                                                        <IconButton>
-                                                            <DownloadIcon />
-                                                        </IconButton>
-                                                        </a>
-                                                    </Box>
                                                 </Card>
                                             </Grid>
                                         );

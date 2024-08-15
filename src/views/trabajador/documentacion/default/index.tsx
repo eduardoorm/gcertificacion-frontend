@@ -15,6 +15,8 @@ import { useAuthUser } from 'react-auth-kit'
 import HeaderTrabajadorView from "../../../header/header";
 import moment from "moment";
 import CardClassWorker from "../../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
+import { tieneFirma } from "../../../../util/getSignature";
+import ModalSignature from "../../../../components/ModalSignature/ModalSignature";
 
 export default function ViewDocumentacionDefault () {
     const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
@@ -23,10 +25,19 @@ export default function ViewDocumentacionDefault () {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const auth = useAuthUser();
+    const idTrabajador = auth()?.id_trabajador;
+    const handleClose = () => setHasSignature(false);
+    const [hasSignature, setHasSignature] = React.useState(false);
 
     React.useEffect(() => {
         dispatch(getClasesByTrabajador(auth()?.id_trabajador || '0'));
     }, []);
+
+    React.useEffect(() => {
+        if (idTrabajador) {
+            tieneFirma(idTrabajador).then(result => setHasSignature(!result));
+        }
+    }, [idTrabajador]);
 
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
@@ -74,6 +85,7 @@ export default function ViewDocumentacionDefault () {
                     {dataDocumentacion(documentaciones)}
                 </Grid>
             </Paper>
+            <ModalSignature hasSignature={hasSignature} handleClose={handleClose} idTrabajador={idTrabajador} />
         </Box>
   )
 }

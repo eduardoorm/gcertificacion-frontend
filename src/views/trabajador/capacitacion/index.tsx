@@ -2,27 +2,36 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Clase, TIPO_CLASE, Trabajador } from "../../../interfaces/entities";
+import { Clase, TIPO_CLASE } from "../../../interfaces/entities";
 import { RootState, getClasesByTrabajador, useAppDispatch, useAppSelector } from "../../../store";
 import { useAPIData } from "../../../api/useAPIData";
 import { useAuthUser } from 'react-auth-kit'
 import HeaderTrabajadorView from "../../header/header";
 import moment from "moment";
 import CardClassWorker from "../../../components/Trabajador/CardClass/CardClassWorker/CardClassWorker";
+import ModalSignature from "../../../components/ModalSignature/ModalSignature";
+import { tieneFirma } from "../../../util/getSignature";
 
 export default function ViewCapacitacionDefault(){
     const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
-    //const [trabajador, setTrabajador] = React.useState<Trabajador>(initialStateTrabajador);
-    const [inducciones, setInducciones] = React.useState<Clase[]>([]);
     const [capacitaciones, setCapacitaciones] = React.useState<Clase[]>([]);
-    const [documentaciones, setDocumentaciones] = React.useState<Clase[]>([]);
-    const userAuthenticated = useAppSelector((state:RootState) => state.usuarios.userAuthenticated);
     const dispatch = useAppDispatch();
     const auth = useAuthUser();
+    const idTrabajador = auth()?.id_trabajador;
+    const handleClose = () => setHasSignature(false);
+    const [hasSignature, setHasSignature] = React.useState(false);
+    
 
     React.useEffect(() => {
         dispatch(getClasesByTrabajador(auth()?.id_trabajador || '0'));
     }, []);
+
+    React.useEffect(() => {
+        if (idTrabajador) {
+            tieneFirma(idTrabajador).then(result => setHasSignature(!result));
+        }
+    }, [idTrabajador]);
+
 
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
@@ -69,6 +78,9 @@ export default function ViewCapacitacionDefault(){
                     {dataCapacitaciones(capacitaciones)}
                 </Grid>
             </Paper>
+
+            <ModalSignature hasSignature={hasSignature} handleClose={handleClose} idTrabajador={idTrabajador} />
+
         </Box>
     );
 }
