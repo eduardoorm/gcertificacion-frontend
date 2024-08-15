@@ -9,27 +9,27 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { Alert, AlertTitle } from '@mui/material'; 
-import { AlertColor } from '@mui/material'; 
-import { Card } from '@mui/material'; 
-import { CardActionArea } from '@mui/material'; 
-import { CardContent } from '@mui/material'; 
-import { CardHeader } from '@mui/material'; 
-import { CardMedia } from '@mui/material'; 
-import { CircularProgress } from '@mui/material'; 
-import { Dialog } from '@mui/material'; 
-import { DialogActions } from '@mui/material'; 
-import { DialogContent } from '@mui/material'; 
+import { Alert, AlertTitle } from '@mui/material';
+import { AlertColor } from '@mui/material';
+import { Card } from '@mui/material';
+import { CardActionArea } from '@mui/material';
+import { CardContent } from '@mui/material';
+import { CardHeader } from '@mui/material';
+import { CardMedia } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { Dialog } from '@mui/material';
+import { DialogActions } from '@mui/material';
+import { DialogContent } from '@mui/material';
 import { DialogTitle } from '@mui/material'
-import { Divider } from '@mui/material'; 
-import { FormControlLabel } from '@mui/material'; 
-import { Grid } from '@mui/material'; 
-import { IconButton } from '@mui/material'; 
-import { MobileStepper } from '@mui/material'; 
-import { Radio } from '@mui/material'; 
-import { RadioGroup } from '@mui/material'; 
-import { Snackbar } from '@mui/material'; 
-import { Stack } from '@mui/material'; 
+import { Divider } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
+import { Grid } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { MobileStepper } from '@mui/material';
+import { Radio } from '@mui/material';
+import { RadioGroup } from '@mui/material';
+import { Snackbar } from '@mui/material';
+import { Stack } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import DownloadIcon from '@mui/icons-material/Download';
 import { VideoPlayer } from '../../../../ui-component/VideoPlayer';
@@ -79,9 +79,9 @@ export default function ViewTrabajadorCapacitacion() {
     const [toastMessage, setToastMessage] = React.useState('');
     const [toastMessageSeverity, setToastMessageSeverity] = React.useState<AlertColor>('success');
     const [loading, setLoading] = React.useState(false);
-    const { examenesAzar: examenesAzarReducer } = useAppSelector((state:RootState) => state.examenesAzar);
+    const { examenesAzar: examenesAzarReducer } = useAppSelector((state: RootState) => state.examenesAzar);
     const [examenAzar, setExamenAzar] = React.useState<ExamenAzar>(initialStateExamenAzar);
-    const { clases: clasesReducer } = useAppSelector((state:RootState) => state.clases);
+    const { clases: clasesReducer } = useAppSelector((state: RootState) => state.clases);
     const [clase, setClase] = React.useState<Clase>(initialStateClase);
     const [preguntas, setPreguntas] = React.useState<Pregunta[]>([]);
     const [respuestasElegidas, setRespuestasElegidas] = React.useState<RespuestaElegida[]>([]);
@@ -107,29 +107,29 @@ export default function ViewTrabajadorCapacitacion() {
         setActiveStepPregunta((prevActiveStep) => prevActiveStep + 1);
         return emblaApi && emblaApi.scrollNext()
     }, [emblaApi])
-  
+
     const onInit = React.useCallback((emblaApi: EmblaCarouselType) => {
-      setScrollSnaps(emblaApi.scrollSnapList())
+        setScrollSnaps(emblaApi.scrollSnapList())
     }, []);
 
     console.log("clasess " + JSON.stringify(clase.archivos))
 
     const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-      setPrevBtnEnabled(emblaApi.canScrollPrev())
-      setNextBtnEnabled(emblaApi.canScrollNext())
+        setSelectedIndex(emblaApi.selectedScrollSnap())
+        setPrevBtnEnabled(emblaApi.canScrollPrev())
+        setNextBtnEnabled(emblaApi.canScrollNext())
     }, [preguntas]);
 
     React.useEffect(() => {
         if (!emblaApi) return
-    
+
         onInit(emblaApi)
         onSelect(emblaApi)
         emblaApi.on('reInit', onInit)
         emblaApi.on('reInit', onSelect)
         emblaApi.on('select', onSelect)
-      }, [emblaApi, onInit, onSelect]);
-    
+    }, [emblaApi, onInit, onSelect]);
+
     React.useEffect(() => {
         dispatch(getClasesCapacitacionByTrabajador(auth()?.id_trabajador || '0'))
     }, []);
@@ -137,7 +137,7 @@ export default function ViewTrabajadorCapacitacion() {
         onFulfilled: (data: Clase[]) => {
             setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
             //setClase(data[0] || initialStateClase);
-            if(data.filter(d => d.id === parseInt(id || '0'))[0] && data.filter(d => d.id === parseInt(id || '0'))[0].tipo === TIPO_CLASE.CAPACITACION) {
+            if (data.filter(d => d.id === parseInt(id || '0'))[0] && data.filter(d => d.id === parseInt(id || '0'))[0].tipo === TIPO_CLASE.CAPACITACION) {
                 dispatch(getExamenAzarByClaseTrabajador(data.filter(d => d.id === parseInt(id || '0'))[0].clases_trabajadores?.id.toString() || '0'));
             }
             let archivos = clase.archivos?.filter(item => item.tipo === 'video');
@@ -153,11 +153,11 @@ export default function ViewTrabajadorCapacitacion() {
         onFulfilled: (data: ExamenAzar[]) => {
             setLoading(false);
 
-            if(!data[0]) return;
+            if (!data[0]) return;
 
             //Respuesta al examen resuelto
-            if( data[0].tipo === TIPO_CLASE.CAPACITACION && data[0].respuestas_correctas + data[0].respuestas_incorrectas > 0){
-                let data_ = {...data[0]};
+            if (data[0].tipo === TIPO_CLASE.CAPACITACION && data[0].respuestas_correctas + data[0].respuestas_incorrectas > 0) {
+                let data_ = { ...data[0] };
                 setExamenAzar(data_);
                 setOpenDialogResult(justSolved);
                 setActiveStepPregunta(0);
@@ -168,7 +168,7 @@ export default function ViewTrabajadorCapacitacion() {
             }
             //Obtención del examen para resolver
             else {
-                setExamenAzar({...initialStateExamenAzar, ...data[0]});
+                setExamenAzar({ ...initialStateExamenAzar, ...data[0] });
                 setPreguntas(data[0]?.preguntas || []);
                 setMessage1(messageNoQuestions);
             }
@@ -188,13 +188,13 @@ export default function ViewTrabajadorCapacitacion() {
 
     const handleToQuiz = () => {
         let data: ExamenAzar = {
-            id:0,
+            id: 0,
             id_clase_trabajador: clase.clases_trabajadores?.id || 0,
             numero_intento: 0,
             respuestas_correctas: 0,
             respuestas_incorrectas: 0,
             nota: 0,
-            certificado: '',            
+            certificado: '',
             aprobado: EXAMEN_APROBADO.NEUTRO
         };
         setActiveStepPregunta(0);
@@ -208,14 +208,14 @@ export default function ViewTrabajadorCapacitacion() {
     }
 
     const handleFinishQuiz = () => {
-        if(respuestasElegidas.length < preguntas.length){
+        if (respuestasElegidas.length < preguntas.length) {
             setToastMessageSeverity('error');
             setToastMessage('No ha respondido todas las preguntas');
             setOpenToastResponse(true);
         }
         else {
             setJustSolved(true);
-            dispatch(solveExamenAzar({id_examen_azar: examenAzar.id, respuestas_elegidas: respuestasElegidas}));
+            dispatch(solveExamenAzar({ id_examen_azar: examenAzar.id, respuestas_elegidas: respuestasElegidas }));
         }
     }
 
@@ -246,8 +246,8 @@ export default function ViewTrabajadorCapacitacion() {
         }
 
         let idx = respuestasElegidas.findIndex(el => el.id_pregunta === resp.id_pregunta);
-        
-        if(idx > -1){
+
+        if (idx > -1) {
             let temp = respuestasElegidas;
             temp[idx] = resp;
             setRespuestasElegidas(temp);
@@ -259,7 +259,7 @@ export default function ViewTrabajadorCapacitacion() {
 
     const handleCloseDialogResult = () => {
         setOpenDialogResult(false);
-        if(examenAzar.aprobado === EXAMEN_APROBADO.APROBADO){
+        if (examenAzar.aprobado === EXAMEN_APROBADO.APROBADO) {
             handleNext();
         }
     }
@@ -268,7 +268,7 @@ export default function ViewTrabajadorCapacitacion() {
         setOpenDialogResult(false);
         setJustSolved(false);
         let data: ExamenAzar = {
-            id:0,
+            id: 0,
             id_clase_trabajador: clase.clases_trabajadores?.id || 0,
             numero_intento: 0,
             respuestas_correctas: 0,
@@ -282,7 +282,7 @@ export default function ViewTrabajadorCapacitacion() {
     return (
         <Box component="main">
             <HeaderTrabajadorView />
-            
+
             <Dialog keepMounted open={openDialogResult} onClose={handleCloseDialogResult}>
                 <DialogTitle>Resultado</DialogTitle>
                 <DialogContent>
@@ -291,9 +291,9 @@ export default function ViewTrabajadorCapacitacion() {
                         <Alert severity="warning">Respuestas incorrectas: {examenAzar.respuestas_incorrectas}</Alert>
                         <Alert severity={examenAzar.aprobado === EXAMEN_APROBADO.APROBADO ? 'success' : 'error'}>Nota: {examenAzar.nota}</Alert>
                         {examenAzar.aprobado === EXAMEN_APROBADO.RECHAZADO && examenAzar.numero_intento === 2 &&
-                        <Alert severity='error'>Ha alcanzado el m&aacute;ximo de intentos<br/>para rendir el examen</Alert> }
+                            <Alert severity='error'>Ha alcanzado el m&aacute;ximo de intentos<br />para rendir el examen</Alert>}
                         {examenAzar.aprobado === EXAMEN_APROBADO.RECHAZADO && examenAzar.numero_intento === 1 &&
-                        <Alert severity='info'>Le queda un intento para rendir<br/>el examen</Alert> }
+                            <Alert severity='info'>Le queda un intento para rendir<br />el examen</Alert>}
                     </Stack>
                 </DialogContent>
                 <DialogActions>
@@ -301,280 +301,308 @@ export default function ViewTrabajadorCapacitacion() {
                 </DialogActions>
             </Dialog>
 
-            {examenAzar.aprobado === EXAMEN_APROBADO.APROBADO && !justSolved && 
-            <Box>
-                <Alert variant='outlined' severity="info" sx={{ mb: 2 }}>
-                    <AlertTitle>Info</AlertTitle>
-                    Usted ya ha realizado exitosamente esta capacitaci&oacute;n; si lo desea, puede descargar el certificado
-                </Alert>
-                <a href={examenAzar.certificado} target='_blank'>
-                <Button variant="contained" sx={{ mt: 1, mr: 1 }}>Descargar certificado</Button>
-                </a>
-            </Box> 
+            {examenAzar.aprobado === EXAMEN_APROBADO.APROBADO && !justSolved &&
+                <Box>
+                    <Alert variant='outlined' severity="info" sx={{ mb: 2 }}>
+                        <AlertTitle>Info</AlertTitle>
+                        Usted ya ha realizado exitosamente esta capacitaci&oacute;n; si lo desea, puede descargar el certificado
+                    </Alert>
+                    <a href={examenAzar.certificado} target='_blank'>
+                        <Button variant="contained" sx={{ mt: 1, mr: 1 }}>Descargar certificado</Button>
+                    </a>
+                </Box>
             }
             {examenAzar.aprobado === EXAMEN_APROBADO.RECHAZADO && examenAzar.numero_intento === 2 && !justSolved &&
-            <Box>
-                <Alert variant='outlined' severity="warning">
-                    <AlertTitle>Intentos superados</AlertTitle>
-                    Usted ya ha realizado esta capacitaci&oacute;n y ha alcanzado la cantidad m&aacute;xima de intentos para aprobar el examen.
-                </Alert>
-            </Box> 
+                <Box>
+                    <Alert variant='outlined' severity="warning">
+                        <AlertTitle>Intentos superados</AlertTitle>
+                        Usted ya ha realizado esta capacitaci&oacute;n y ha alcanzado la cantidad m&aacute;xima de intentos para aprobar el examen.
+                    </Alert>
+                </Box>
             }
 
-            {(examenAzar.aprobado === EXAMEN_APROBADO.NEUTRO || justSolved || (examenAzar.aprobado === EXAMEN_APROBADO.RECHAZADO && examenAzar.numero_intento < 2)) && 
-            <>
-            <Card>
-                <CardHeader title='Pautas a seguir' />
-                <Divider />
-                <CardContent>
-                    <Typography variant='body1' color='text.seconday'>
-                        A continuaci&oacute;n se encontrar&aacute;n los temas que deben realizar y aprobar para continuar con su proceso
-                    </Typography>
-                    <Typography variant='body2' color='text.seconday'>
-                        <InfoIcon />{' '}
-                        Recuerde que debe visualizar el video completo y aprobar el examen para poder obtener un certificado
-                    </Typography>
-                </CardContent>
-            </Card>
-            <Stepper activeStep={activeStep} orientation="vertical" sx={{mt: 5}}>
-                <Step key='paso.1'>
-                    <StepLabel>
-                        Inicio
-                    </StepLabel>
-                    <StepContent>
-                        <Typography>Pulse el botón para iniciar con la capacitación</Typography>
-                        <Box sx={{ mb: 2 }}>
-                            <div>
-                                <Button
-                                    variant="contained"
-                                    onClick={handleNext}
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                    Empezar
-                                </Button>
-                            </div>
-                        </Box>
-                    </StepContent>
-                </Step>
-                <Step key='paso.2'>
-                    <StepLabel>
-                        {clase.titulo}
-                    </StepLabel>
-                    <StepContent>
-                        <Typography sx={{my: 3}}>{clase.descripcion}</Typography>
+            {(examenAzar.aprobado === EXAMEN_APROBADO.NEUTRO || justSolved || (examenAzar.aprobado === EXAMEN_APROBADO.RECHAZADO && examenAzar.numero_intento < 2)) &&
+                <>
+                    <Card>
+                        <CardHeader title='Pautas a seguir' />
+                        <Divider />
+                        <CardContent>
+                            <Typography variant='body1' color='text.seconday'>
+                                A continuaci&oacute;n se encontrar&aacute;n los temas que deben realizar y aprobar para continuar con su proceso
+                            </Typography>
+                            <Typography variant='body2' color='text.seconday'>
+                                <InfoIcon />{' '}
+                                Recuerde que debe visualizar el video completo y aprobar el examen para poder obtener un certificado
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                    <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 5 }}>
+                        <Step key='paso.1'>
+                            <StepLabel>
+                                Inicio
+                            </StepLabel>
+                            <StepContent>
+                                <Typography>Pulse el botón para iniciar con la capacitación</Typography>
+                                <Box sx={{ mb: 2 }}>
+                                    <div>
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleNext}
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Empezar
+                                        </Button>
+                                    </div>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                        <Step key='paso.2'>
+                            <StepLabel>
+                                {clase.titulo}
+                            </StepLabel>
+                            <StepContent>
+                                <Typography sx={{ my: 3 }}>{clase.descripcion}</Typography>
 
-                        {
+                                {
 
-                                
-                            
-                        }
-                        <VideoPlayer url={clase.archivos?.filter(item => item.tipo === 'video')[0]?.url || ''} onEnded={handleFinish} />
-                        <Box sx={{ my: 3, pt:2}}>
-                            <div>
-                                {finishedVideo === 1 &&
-                                <Alert severity="info">Ha terminado de ver el video, por favor presione el bot&oacute;n "Continuar" para rendir el examen</Alert>}
-                                
-                                {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
-                                <>
-                                <Grid container spacing={2} 
-                                    sx={{ m: 1, p: 2, alignItems:"stretch" , flexWrap:"wrap" ,backgroundColor: "#E7EBF0", borderRadius: 1, display: 'flex', flexDirection: 'row' }} 
-                                    justifyContent={"flex-start"} alignContent={"center"}>
-                                    {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
-                                        return(
-                                            <Grid item xs={6} key={archivo.id}>
-                                                <Card sx={{ display: 'flex', flexWrap: 'wrap', height:'100%'}}>
-                                                    <CardActionArea>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap:'wrap', justifyContent:'center' }}>
-                                                            <CardMedia
-                                                                component="img"
-                                                                height="256"
-                                                                sx={{ objectFit: 'cover', maxWidth: '256px' }}
-                                                                image={archivo.imagen}
-                                                            />
-                                                           <CardContent 
-                                                            sx={{
-                                                                display: 'flex', 
-                                                                flexWrap: 'wrap', 
-                                                                width: {
-                                                                    xs: '100%',
-                                                                    md: '60%',
-                                                                    '@media (max-width: 1404px)': {
-                                                                        width: '100%', 
-                                                                    }
+
+
+                                }
+                                <VideoPlayer url={clase.archivos?.filter(item => item.tipo === 'video')[0]?.url || ''} onEnded={handleFinish} />
+                                <Box sx={{ my: 3, pt: 2 }}>
+                                    <div>
+                                        {finishedVideo === 1 &&
+                                            <Alert severity="info">Ha terminado de ver el video, por favor presione el bot&oacute;n "Continuar" para rendir el examen</Alert>}
+
+                                        {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
+                                            <>
+                                                <Grid container spacing={2}
+                                                    sx={{ mb: 5, flexWrap: "wrap", backgroundColor: "#E7EBF0", borderRadius: 1, display: 'flex', flexDirection: 'row' }}
+                                                    justifyContent={"flex-start"} alignContent={"start"}>
+                                                    {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
+                                                        console.log(archivo)
+                                                        return (
+                                                            <Grid item key={archivo.id} sx={{
+                                                                width: 'min-content',
+                                                                flex: '1',
+                                                                minWidth: '450px',
+                                                                '@media (max-width: 550px)': {
+                                                                    width: '100%',
+                                                                    minWidth: '100%'
                                                                 }
-                                                               }} 
-                                                            >
-                                                                    <CardContent sx={{display:'flex' , width:'100%'}} >
-                                                                        <Typography component="p" variant="h5" sx={{wordWrap:'break-word'}}>
-                                                                            {archivo.titulo}
-                                                                        </Typography> 
-                                                                        <a target="_blank" href={archivo.url}>
-                                                                            <IconButton>
-                                                                                <DownloadIcon />
-                                                                            </IconButton>
-                                                                        </a>
-                                                                    </CardContent>
-                                                                    <CardContent sx={{width:'100%'}}>
-                                                                        <Typography component="p" variant="body2" sx={{ wordWrap: 'break-word' }}>
-                                                                            {archivo.descripcion}
-                                                                        </Typography>
-                                                                    </CardContent>
-                                                            </CardContent>
+                                                            }}>
+                                                                <Card sx={{
+                                                                    display: 'flex',
+                                                                    flexDirection: 'column',
+                                                                    flexWrap: 'wrap',
+                                                                    height: '100%',
+                                                                    width: '100%',
+                                                                }}>
+                                                                    <CardActionArea href={archivo.url}>
+                                                                        <Box sx={{
+                                                                            width: '100%',
+                                                                            height: 'min-content',
+                                                                            display: 'flex',
+                                                                            flexDirection: 'row',
+                                                                            flexWrap: 'wrap',
+                                                                            justifyContent: 'start',
+                                                                            '@media (max-width: 550px)': {
+                                                                                flexDirection: 'column',
+                                                                                justifyContent: 'center',
+                                                                            }
 
+                                                                        }}>
+                                                                            <CardMedia
+                                                                                component="img"
+                                                                                sx={{
+                                                                                    height: '100%',
+                                                                                    width: '20%',
+                                                                                    '@media (max-width: 550px)': {
+                                                                                        width: '100%',
+                                                                                        height: '40%'
+                                                                                    }
+                                                                                }}
+                                                                                image={archivo.imagen}
+                                                                            />
+                                                                            <CardContent
+                                                                                sx={{
+                                                                                    width: '80%',
+                                                                                    '@media (max-width: 550px)': {
+                                                                                        width: '100%',
+                                                                                    },
+                                                                                    display: 'flex',
+                                                                                    flexWrap: 'wrap',
+                                                                                    p: '16px !important'
+                                                                                }}
+                                                                            >
+                                                                                <CardContent sx={{
+                                                                                    display: 'flex',
+                                                                                    width: '100%',
+                                                                                    p: '0 !important'
+                                                                                }} >
+                                                                                    <Typography component="p" variant="h5" sx={{ wordWrap: 'break-word' }}>
+                                                                                        {archivo.titulo}
+                                                                                    </Typography>
+                                                                                </CardContent>
+                                                                                <CardContent sx={{ width: '100%', p: '0' }}>
+                                                                                    <Typography component="p" variant="body2" sx={{ wordWrap: 'break-word' }}>
+                                                                                        {archivo.descripcion}
+                                                                                    </Typography>
+                                                                                </CardContent>
+                                                                            </CardContent>
+                                                                        </Box>
+                                                                    </CardActionArea>
+                                                                </Card>
+                                                            </Grid>
+                                                        );
+                                                    })}
+                                                </Grid>
+                                            </>
+                                        )}
 
-                                                        </Box>
-                                                    </CardActionArea>
-                                                </Card>
-                                            </Grid>
-                                        );
-                                    })}
-                                </Grid>
-                                </>
-                                )}
+                                        {/*disabled={finishedVideo === 0 && clase.archivos?.filter(item => item.tipo === TIPO_ARCHIVO.VIDEO)[0]?.visto === VIDEO_VISTO.NO_VISTO}*/}
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleToQuiz}
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Continuar
+                                        </Button>
+                                        <Button
+                                            onClick={handleBack}
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Regresar
+                                        </Button>
+                                    </div>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                        <Step key='paso.3'>
+                            <StepLabel>
+                                Examen
+                            </StepLabel>
+                            <StepContent sx={{ backgroundColor: 'white', p: 3, borderRadius: 2 }}>
 
-                                {/*disabled={finishedVideo === 0 && clase.archivos?.filter(item => item.tipo === TIPO_ARCHIVO.VIDEO)[0]?.visto === VIDEO_VISTO.NO_VISTO}*/ }
-                                <Button
-                                    variant="contained"
-                                    onClick={handleToQuiz}
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                    Continuar
-                                </Button>
-                                <Button
-                                    onClick={handleBack}
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                    Regresar
-                                </Button>
-                            </div>
-                        </Box>
-                    </StepContent>
-                </Step>
-                <Step key='paso.3'>
-                    <StepLabel>
-                        Examen
-                    </StepLabel>
-                    <StepContent sx={{backgroundColor: 'white', p: 3, borderRadius: 2}}>
-                        
-                        {loading && <CircularProgress color="secondary" />} 
+                                {loading && <CircularProgress color="secondary" />}
 
-                        <Alert severity="info">Lea cuidadosamente las preguntas antes de elegir una respuesta</Alert>
-                        {preguntas.length === 0 && !justSolved && <Alert severity="error">{message1}</Alert>}
-                        
-                        <div className="embla">
-                            <div className="embla__viewport" ref={emblaRef}>
-                                <div className="embla__container">
-                                    {preguntas.length > 0 && preguntas.map((pregunta, index) => (
-                                        <div className="embla__slide" key={pregunta.id}>
-                                            <Typography variant="h5" component="h2" sx={{mb: 2}}>
-                                                {pregunta.pregunta}
-                                            </Typography>
-                                            <Divider />
-                                            <RadioGroup
-                                                sx={{mt: 4}}
-                                                aria-labelledby={`radio-buttons-group-${examenAzar.numero_intento}-${pregunta.id}`}
-                                                name={`radio-buttons-group-${examenAzar.numero_intento}-${pregunta.id}`}
-                                                onChange={guardarRespuesta}
-                                            >
-                                                {pregunta.respuestas?.map((respuesta, index) => (
-                                                    <FormControlLabel 
-                                                        key={respuesta.id} 
-                                                        value={`${pregunta.id},${respuesta.id}`} 
-                                                        control={<Radio />} 
-                                                        label={respuesta.respuesta} />
-                                                ))}
-                                            </RadioGroup>
+                                <Alert severity="info">Lea cuidadosamente las preguntas antes de elegir una respuesta</Alert>
+                                {preguntas.length === 0 && !justSolved && <Alert severity="error">{message1}</Alert>}
+
+                                <div className="embla">
+                                    <div className="embla__viewport" ref={emblaRef}>
+                                        <div className="embla__container">
+                                            {preguntas.length > 0 && preguntas.map((pregunta, index) => (
+                                                <div className="embla__slide" key={pregunta.id}>
+                                                    <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
+                                                        {pregunta.pregunta}
+                                                    </Typography>
+                                                    <Divider />
+                                                    <RadioGroup
+                                                        sx={{ mt: 4 }}
+                                                        aria-labelledby={`radio-buttons-group-${examenAzar.numero_intento}-${pregunta.id}`}
+                                                        name={`radio-buttons-group-${examenAzar.numero_intento}-${pregunta.id}`}
+                                                        onChange={guardarRespuesta}
+                                                    >
+                                                        {pregunta.respuestas?.map((respuesta, index) => (
+                                                            <FormControlLabel
+                                                                key={respuesta.id}
+                                                                value={`${pregunta.id},${respuesta.id}`}
+                                                                control={<Radio />}
+                                                                label={respuesta.respuesta} />
+                                                        ))}
+                                                    </RadioGroup>
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <MobileStepper
-                            className='containerBtnNextAndAfter'
-                            variant="progress"
-                            steps={preguntas.length}
-                            position="static"
-                            activeStep={activeStepPregunta}
-                            nextButton={
-                                <Button
-                                    className='btnQuestion'
-                                    size="small"
-                                    onClick={scrollNext}
-                                    disabled={!nextBtnEnabled}
-                                >
-                                    Siguiente
-                                    <KeyboardArrowRight />
-                                </Button>
-                            }
-                            backButton={
-                                <Button   className='btnQuestion'  size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
-                                    <KeyboardArrowLeft />
-                                    Anterior
-                                </Button>
-                            }
-                        />
-                        <Box sx={{ mt: 4, mb: 2, visibility: respuestasElegidas.length < preguntas.length ? 'hidden' : 'visible' }}>
-                            <div>
-                                {!justSolved && examenAzar.numero_intento <= 2 &&
-                                <Button
-                                    disabled={respuestasElegidas.length < preguntas.length}
-                                    variant="contained"
-                                    onClick={handleFinishQuiz}
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                    Finalizar examen
-                                </Button>}
-                                {justSolved && examenAzar.numero_intento < 2 &&
-                                <Button sx={{mt: 1, mr: 1}} 
-                                    variant='contained'
-                                    onClick={solicitarNuevoExamen}
-                                >
-                                    Volver a intentar
-                                </Button>}
-                                <Button
-                                    onClick={handleBackToVideo}
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                  Regresar
-                                </Button>
-                            </div>
-                        </Box>
-                    </StepContent>
-                </Step>
-                <Step key='paso.4'>
-                    <StepLabel>
-                        Certificado
-                    </StepLabel>
-                    <StepContent>
-                        <Typography>Descargar certificado</Typography>
-                        <Box sx={{ mb: 2 }}>
-                            <a href={examenAzar.certificado} target='_blank'>
-                                <Button
-                                    variant="contained"
-                                    sx={{ mt: 1, mr: 1 }}
-                                >
-                                    Descargar
-                                </Button>
-                            </a>
-                        </Box>
-                    </StepContent>
-                </Step>
-            </Stepper>
-            {activeStep === 4/*steps.length*/ && (
-            <Paper square elevation={0} sx={{ p: 3 }}>
-                <Typography>All steps completed - you&apos;re finished</Typography>
-                <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                    Reset
-                </Button>
-            </Paper>
-            )}
-            </>}
+                                <MobileStepper
+                                    className='containerBtnNextAndAfter'
+                                    variant="progress"
+                                    steps={preguntas.length}
+                                    position="static"
+                                    activeStep={activeStepPregunta}
+                                    nextButton={
+                                        <Button
+                                            className='btnQuestion'
+                                            size="small"
+                                            onClick={scrollNext}
+                                            disabled={!nextBtnEnabled}
+                                        >
+                                            Siguiente
+                                            <KeyboardArrowRight />
+                                        </Button>
+                                    }
+                                    backButton={
+                                        <Button className='btnQuestion' size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
+                                            <KeyboardArrowLeft />
+                                            Anterior
+                                        </Button>
+                                    }
+                                />
+                                <Box sx={{ mt: 4, mb: 2, visibility: respuestasElegidas.length < preguntas.length ? 'hidden' : 'visible' }}>
+                                    <div>
+                                        {!justSolved && examenAzar.numero_intento <= 2 &&
+                                            <Button
+                                                disabled={respuestasElegidas.length < preguntas.length}
+                                                variant="contained"
+                                                onClick={handleFinishQuiz}
+                                                sx={{ mt: 1, mr: 1 }}
+                                            >
+                                                Finalizar examen
+                                            </Button>}
+                                        {justSolved && examenAzar.numero_intento < 2 &&
+                                            <Button sx={{ mt: 1, mr: 1 }}
+                                                variant='contained'
+                                                onClick={solicitarNuevoExamen}
+                                            >
+                                                Volver a intentar
+                                            </Button>}
+                                        <Button
+                                            onClick={handleBackToVideo}
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Regresar
+                                        </Button>
+                                    </div>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                        <Step key='paso.4'>
+                            <StepLabel>
+                                Certificado
+                            </StepLabel>
+                            <StepContent>
+                                <Typography>Descargar certificado</Typography>
+                                <Box sx={{ mb: 2 }}>
+                                    <a href={examenAzar.certificado} target='_blank'>
+                                        <Button
+                                            variant="contained"
+                                            sx={{ mt: 1, mr: 1 }}
+                                        >
+                                            Descargar
+                                        </Button>
+                                    </a>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                    </Stepper>
+                    {activeStep === 4/*steps.length*/ && (
+                        <Paper square elevation={0} sx={{ p: 3 }}>
+                            <Typography>All steps completed - you&apos;re finished</Typography>
+                            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                                Reset
+                            </Button>
+                        </Paper>
+                    )}
+                </>}
 
             <Snackbar open={openToastResponse} autoHideDuration={6000} onClose={handleCloseToastResponse}>
                 <Alert onClose={handleCloseToastResponse} severity={toastMessageSeverity} sx={{ width: '100%' }}>
                     {toastMessage}
                 </Alert>
             </Snackbar>
-        </Box>
+        </Box >
     );
 }
