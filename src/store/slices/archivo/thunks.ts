@@ -37,7 +37,6 @@ export const getArchivosByClase = createAsyncThunk<
     >('get/archivos/clase/id', async(id: string, {rejectWithValue}) => {
     try {
         const response = await gcertificacionApi.get<APIResponse<Archivo[]>>(`/clases/${id}/archivos`);
-        console.log('respuesta del thunk getArchivosByClase');
         return response.data.data;
     } catch (err: any) {
         return rejectWithValue(getExceptionPayload(err));

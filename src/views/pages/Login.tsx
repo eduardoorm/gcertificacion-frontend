@@ -47,11 +47,9 @@ export default function Login() {
             password: data_.get('password')!.toString(),
         }
         
-        console.log("data " + data)
         try {
 
             const response = await gcertificacionApi.post('/auth/login', data);
-            console.log("response " + response)
             const userAuthenticated: UserAuthenticated = {
                 id_trabajador: response.data.data.id_trabajador,
                 id_empresa_cliente: response.data.data.id_empresa_cliente,
@@ -96,7 +94,6 @@ export default function Login() {
             }
             else if (err && err instanceof Error) setErrorMessage(err.message);
       
-            console.log("Error: ", err);
         }
     };
 

@@ -1,0 +1,49 @@
+
+
+  /* Estilos para dispositivos medianos */
+ 
+
+  @media screen and (max-width: 599px) {
+    /* Estilos para dispositivos pequeños */
+    .cardClassInfoWorkerMedia{
+        height: 120px;
+        width: 100%;
+    }
+
+    .cardClassWorker{
+        width: 100%;
+    }
+
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    /* Estilos para dispositivos medianos */
+    .cardClassInfoWorkerMedia{
+        height: 180px;
+        width: 100%;
+    }
+    
+    
+  }
+
+  @media (min-width: 600px) and (max-width: 959px) and (orientation: portrait) {
+      /* Estilos para dispositivos medianos en modo vertical */
+
+}
+
+@media (min-width: 960px) {
+     /* Estilos para dispositivos grandes */
+     .cardClassInfoWorkerMedia{
+        height: 200px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Estilos para pantallas muy grandes */
+    .cardClassInfoWorkerMedia{
+        height: 220px;
+        width: 100%;
+    }
+    
+}

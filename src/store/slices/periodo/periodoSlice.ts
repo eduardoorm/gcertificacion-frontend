@@ -113,7 +113,6 @@ export const periodoSlice = createSlice({
         })
         .addCase(deletePeriodo.fulfilled, (state, action) => {
             state.periodos.status = APIStatus.FULFILLED;
-            console.log(state.periodos.data.filter(periodo => periodo.id !== action.payload.id));
             state.periodos.data = state.periodos.data.filter(periodo => periodo.id !== action.payload.id);
         })
         .addCase(deletePeriodo.rejected, (state, action) => {

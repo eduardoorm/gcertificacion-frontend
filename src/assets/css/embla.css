@@ -1,4 +1,4 @@
-/*.embla {
+.embla {
     overflow: hidden;
 }
 .embla__container {
@@ -7,7 +7,7 @@
 .embla__slide {
     flex: 0 0 100%;
     min-width: 0;
-}*/
+}
 
 .embla {
     --slide-spacing: 1rem;
@@ -31,4 +31,35 @@
     min-width: 0;
     padding-left: var(--slide-spacing);
     position: relative;
+  }
+
+  @media screen and (max-width: 599px) {
+    /* Estilos para dispositivos pequeños */
+    .MuiFormGroup-root{
+      display: flex;
+      height: auto;
+    }
+  
+    .MuiFormGroup-root>label{
+      margin-bottom: 0.85rem;
+    }
+
+    .MuiLinearProgress-root{
+      width: 15%;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    /* Estilos para dispositivos pequeños */
+
+    .containerBtnNextAndAfter{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btnQuestion{
+      height: 3rem;
+    }
   }

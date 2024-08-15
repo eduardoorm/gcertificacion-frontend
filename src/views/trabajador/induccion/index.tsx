@@ -42,7 +42,7 @@ import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import '../../../assets/css/embla.css';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import HeaderTrabajadorView from '../header';
+import HeaderTrabajadorView from '../../header/header';
 
 const messageNoQuestions = 'No hay preguntas disponibles, comuníquese con el administrador';
 
@@ -367,39 +367,41 @@ export default function ViewTrabajadorInduccion() {
                                 
                                 {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
                                 <>
-                                <Grid container spacing={2} 
+                                <Grid className='container' spacing={2} 
                                     sx={{m: 1, p: 2, backgroundColor: "#E7EBF0", borderRadius: 1}} 
-                                    direction={"row"} justifyContent={"flex-start"} alignContent={"center"} alignItems={"flex-start"}>
+                                    >
                                     
                                     {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
                                         return(
-                                            <Grid item xs={6} key={archivo.id}>
-                                                <Card sx={{ display: 'flex' }}>
-                                                    <CardActionArea>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                            <Grid className='gridFiles' item xs={6} key={archivo.id} >
+                                                <Card className='cardDownloadFiles'>
+                                                   
+                                                        <Box className='cardDownloadFiles'>
                                                             <CardMedia
                                                                 component="img"
-                                                                height="256"
+                                                                height="auto"
                                                                 sx={{ objectFit: 'cover', maxWidth: '256px' }}
                                                                 image={archivo.imagen}
                                                             />
-                                                            <CardContent >
-                                                                <Typography component="div" variant="h5">
-                                                                    {archivo.titulo}
-                                                                </Typography>
-                                                                <Typography variant="subtitle2" color="text.secondary" component="div">
-                                                                    {archivo.descripcion}
-                                                                </Typography>
-                                                            </CardContent>
+
+                                                            <div className='cardDowloandFilesContent'>
+                                                                <CardContent className=''>
+                                                                    <Typography component="div" variant="h5" width={'100%'}>
+                                                                        {archivo.titulo}
+                                                                    </Typography>
+                                                                    <Typography variant="subtitle2" color="text.secondary" component="div">
+                                                                        {archivo.descripcion}
+                                                                    </Typography>
+                                                                </CardContent>
+                                                                <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pt: 1, flexDirection: 'column' }}>
+                                                                    <a target="_blank" href={archivo.url}>
+                                                                    <IconButton>
+                                                                        <DownloadIcon />
+                                                                    </IconButton>
+                                                                    </a>
+                                                                </Box>
+                                                            </div>
                                                         </Box>
-                                                    </CardActionArea>
-                                                    <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pt: 1, flexDirection: 'column' }}>
-                                                        <a target="_blank" href={archivo.url}>
-                                                        <IconButton>
-                                                            <DownloadIcon />
-                                                        </IconButton>
-                                                        </a>
-                                                    </Box>
                                                 </Card>
                                             </Grid>
                                         );
@@ -466,12 +468,14 @@ export default function ViewTrabajadorInduccion() {
                             </div>
                         </div>
                         <MobileStepper
+                            className='containerBtnNextAndAfter'
                             variant="progress"
                             steps={preguntas.length}
                             position="static"
                             activeStep={activeStepPregunta}
                             nextButton={
                                 <Button
+                                    className='btnQuestion'
                                     size="small"
                                     onClick={scrollNext}
                                     disabled={!nextBtnEnabled}
@@ -481,7 +485,7 @@ export default function ViewTrabajadorInduccion() {
                                 </Button>
                             }
                             backButton={
-                                <Button size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
+                                <Button className='btnQuestion' size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
                                     <KeyboardArrowLeft />
                                     Anterior
                                 </Button>

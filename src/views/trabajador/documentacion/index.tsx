@@ -8,7 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import FileDownloadDoneIcon from '@mui/icons-material/FileDownloadDone';
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAuthUser } from "react-auth-kit";
 import { RootState, getClasesDocumentacionByTrabajador, useAppDispatch, useAppSelector } from "../../../store";
 import { useAPIData } from "../../../api/useAPIData";
@@ -16,7 +16,7 @@ import { Archivo, Clase, DECLARACION_JURADA_ACEPTADA, ARCHIVO_DESCARGADO, TIPO_C
 import { Alert, Button, CardActions, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Tooltip } from "@mui/material";
 import { acceptDeclaracionJurada, getDeclaracionesJuradasByTrabajador, marcarArchivoDescargado } from "../../../store/slices/archivoTrabajador";
 import moment from "moment";
-import HeaderTrabajadorView from "../header";
+import HeaderTrabajadorView from "../../header/header";
 
 const initialStateClase: Clase = {
     id: 0,
@@ -58,8 +58,8 @@ export default function ViewTrabajadorDocumentacion(){
     const { archivosTrabajadores: declaracionesJuradasReducer } = useAppSelector((state:RootState) => state.archivosTrabajadores);
     const [declaracionesJuradas, setDeclaracionesJuradas] = React.useState<ArchivoTrabajador[]>([]);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const auth = useAuthUser();
+    const { id } = useParams();
 
     React.useEffect(() => {
         dispatch(getClasesDocumentacionByTrabajador(auth()?.id_trabajador || '0'));
@@ -68,10 +68,10 @@ export default function ViewTrabajadorDocumentacion(){
 
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
-            setClase(data[0]);
+            //setClase(data[0]);
+            setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
             if(!data[0]) setArchivos([]);
-            else setArchivos(data[0].archivos || []);
-            console.log(data[0]);
+            else setArchivos(clase.archivos || []);
         },
         onRejected: error => {
             console.log(error);
@@ -83,7 +83,6 @@ export default function ViewTrabajadorDocumentacion(){
     useAPIData(declaracionesJuradasReducer, React.useMemo(() => ({
         onFulfilled: (data: ArchivoTrabajador[]) => {
             setDeclaracionesJuradas(data);
-            console.log(data);
         },
         onRejected: error => {
             console.log(error);

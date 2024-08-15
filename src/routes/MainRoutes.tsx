@@ -26,14 +26,18 @@ const TrabajadorInduccion = Loadable(lazy(() => import('../views/trabajador/indu
 const TrabajadorCapacitacionDefault = Loadable(lazy(() => import('../views/trabajador/capacitacion')));
 const TrabajadorCapacitacion = Loadable(lazy(() => import('../views/trabajador/capacitacion/id')));
 const TrabajadorDocumentacion = Loadable(lazy(() => import('../views/trabajador/documentacion')));
+const TrabajadorInduccionDefault = Loadable(lazy(() => import('../views/trabajador/induccion/default')));
+const TrabajadorDocumentacionDefault = Loadable(lazy(() => import('../views/trabajador/documentacion/default')));
 
 const MainRoutes = {
     path: '/',
     element: <MainLayout />,
-    children: [{
+    children: [
+    {
         path: '/',
         element: <DashboardDefault /> 
-    },{
+    },
+    {
         path: 'admin',
         children: [{
             path: 'default',
@@ -63,21 +67,29 @@ const MainRoutes = {
             path: 'informes/clientes/:id',
             element: <PrivateRoute><AdminInformesClientes /></PrivateRoute>
         }]
-    }, {
+    }, 
+    {
         path: 'empresa',
         children: [{
             path: 'default/:id',
             element: <PrivateRoute><EmpresaDefault/></PrivateRoute>
         }]
-    }, {
+    }, 
+    {
         path: 'trabajador',
         children: [{
             path: 'default',
             element: <PrivateRoute><TrabajadorDefault/></PrivateRoute>
-        }, {
+        },
+        {
             path: 'induccion',
+            element: <PrivateRoute><TrabajadorInduccionDefault/></PrivateRoute>
+         }
+        , {
+            path: 'induccion/:id',
             element: <PrivateRoute><TrabajadorInduccion/></PrivateRoute>
-        }, {
+        },
+        {
             path: 'capacitacion',
             element: <PrivateRoute><TrabajadorCapacitacionDefault/></PrivateRoute>
         }, {
@@ -85,6 +97,10 @@ const MainRoutes = {
             element: <PrivateRoute><TrabajadorCapacitacion/></PrivateRoute>
         }, {
             path: 'documentacion',
+            element: <PrivateRoute><TrabajadorDocumentacionDefault/></PrivateRoute>
+        }
+        , {
+            path: 'documentacion/:id',
             element: <PrivateRoute><TrabajadorDocumentacion/></PrivateRoute>
         }]
     }]

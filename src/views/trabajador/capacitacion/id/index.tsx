@@ -42,7 +42,8 @@ import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import '../../../../assets/css/embla.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
-import HeaderTrabajadorView from '../../header';
+import HeaderTrabajadorView from '../../../header/header';
+import { WhatsApp } from '@mui/icons-material';
 
 const messageNoQuestions = 'No hay preguntas disponibles, comuníquese con el administrador';
 
@@ -110,7 +111,9 @@ export default function ViewTrabajadorCapacitacion() {
     const onInit = React.useCallback((emblaApi: EmblaCarouselType) => {
       setScrollSnaps(emblaApi.scrollSnapList())
     }, []);
-  
+
+    console.log("clasess " + JSON.stringify(clase.archivos))
+
     const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
       setSelectedIndex(emblaApi.selectedScrollSnap())
       setPrevBtnEnabled(emblaApi.canScrollPrev())
@@ -130,7 +133,6 @@ export default function ViewTrabajadorCapacitacion() {
     React.useEffect(() => {
         dispatch(getClasesCapacitacionByTrabajador(auth()?.id_trabajador || '0'))
     }, []);
-    
     useAPIData(clasesReducer, React.useMemo(() => ({
         onFulfilled: (data: Clase[]) => {
             setClase(data.filter(d => d.id === parseInt(id || '0'))[0] || initialStateClase);
@@ -138,6 +140,7 @@ export default function ViewTrabajadorCapacitacion() {
             if(data.filter(d => d.id === parseInt(id || '0'))[0] && data.filter(d => d.id === parseInt(id || '0'))[0].tipo === TIPO_CLASE.CAPACITACION) {
                 dispatch(getExamenAzarByClaseTrabajador(data.filter(d => d.id === parseInt(id || '0'))[0].clases_trabajadores?.id.toString() || '0'));
             }
+            let archivos = clase.archivos?.filter(item => item.tipo === 'video');
         },
         onRejected: (error) => {
             console.log(error);
@@ -276,8 +279,6 @@ export default function ViewTrabajadorCapacitacion() {
         };
         dispatch(addExamenAzar(data));
     }
-
-
     return (
         <Box component="main">
             <HeaderTrabajadorView />
@@ -361,6 +362,12 @@ export default function ViewTrabajadorCapacitacion() {
                     </StepLabel>
                     <StepContent>
                         <Typography sx={{my: 3}}>{clase.descripcion}</Typography>
+
+                        {
+
+                                
+                            
+                        }
                         <VideoPlayer url={clase.archivos?.filter(item => item.tipo === 'video')[0]?.url || ''} onEnded={handleFinish} />
                         <Box sx={{ my: 3, pt:2}}>
                             <div>
@@ -370,38 +377,53 @@ export default function ViewTrabajadorCapacitacion() {
                                 {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
                                 <>
                                 <Grid container spacing={2} 
-                                    sx={{m: 1, p: 2, backgroundColor: "#E7EBF0", borderRadius: 1}} 
-                                    direction={"row"} justifyContent={"flex-start"} alignContent={"center"} alignItems={"flex-start"}>
-                                    
+                                    sx={{ m: 1, p: 2, alignItems:"stretch" , flexWrap:"wrap" ,backgroundColor: "#E7EBF0", borderRadius: 1, display: 'flex', flexDirection: 'row' }} 
+                                    justifyContent={"flex-start"} alignContent={"center"}>
                                     {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
                                         return(
                                             <Grid item xs={6} key={archivo.id}>
-                                                <Card sx={{ display: 'flex' }}>
+                                                <Card sx={{ display: 'flex', flexWrap: 'wrap', height:'100%'}}>
                                                     <CardActionArea>
-                                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                                        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap:'wrap', justifyContent:'center' }}>
                                                             <CardMedia
                                                                 component="img"
                                                                 height="256"
                                                                 sx={{ objectFit: 'cover', maxWidth: '256px' }}
                                                                 image={archivo.imagen}
                                                             />
-                                                            <CardContent >
-                                                                <Typography component="div" variant="h5">
-                                                                    {archivo.titulo}
-                                                                </Typography>
-                                                                <Typography variant="subtitle2" color="text.secondary" component="div">
-                                                                    {archivo.descripcion}
-                                                                </Typography>
+                                                           <CardContent 
+                                                            sx={{
+                                                                display: 'flex', 
+                                                                flexWrap: 'wrap', 
+                                                                width: {
+                                                                    xs: '100%',
+                                                                    md: '60%',
+                                                                    '@media (max-width: 1404px)': {
+                                                                        width: '100%', 
+                                                                    }
+                                                                }
+                                                               }} 
+                                                            >
+                                                                    <CardContent sx={{display:'flex' , width:'100%'}} >
+                                                                        <Typography component="p" variant="h5" sx={{wordWrap:'break-word'}}>
+                                                                            {archivo.titulo}
+                                                                        </Typography> 
+                                                                        <a target="_blank" href={archivo.url}>
+                                                                            <IconButton>
+                                                                                <DownloadIcon />
+                                                                            </IconButton>
+                                                                        </a>
+                                                                    </CardContent>
+                                                                    <CardContent sx={{width:'100%'}}>
+                                                                        <Typography component="p" variant="body2" sx={{ wordWrap: 'break-word' }}>
+                                                                            {archivo.descripcion}
+                                                                        </Typography>
+                                                                    </CardContent>
                                                             </CardContent>
+
+
                                                         </Box>
                                                     </CardActionArea>
-                                                    <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pt: 1, flexDirection: 'column' }}>
-                                                        <a target="_blank" href={archivo.url}>
-                                                        <IconButton>
-                                                            <DownloadIcon />
-                                                        </IconButton>
-                                                        </a>
-                                                    </Box>
                                                 </Card>
                                             </Grid>
                                         );
@@ -468,12 +490,14 @@ export default function ViewTrabajadorCapacitacion() {
                             </div>
                         </div>
                         <MobileStepper
+                            className='containerBtnNextAndAfter'
                             variant="progress"
                             steps={preguntas.length}
                             position="static"
                             activeStep={activeStepPregunta}
                             nextButton={
                                 <Button
+                                    className='btnQuestion'
                                     size="small"
                                     onClick={scrollNext}
                                     disabled={!nextBtnEnabled}
@@ -483,7 +507,7 @@ export default function ViewTrabajadorCapacitacion() {
                                 </Button>
                             }
                             backButton={
-                                <Button size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
+                                <Button   className='btnQuestion'  size="small" onClick={scrollPrev} disabled={!prevBtnEnabled}>
                                     <KeyboardArrowLeft />
                                     Anterior
                                 </Button>

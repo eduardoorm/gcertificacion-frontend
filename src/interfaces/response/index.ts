@@ -1,5 +1,3 @@
-import { EmpresaCliente } from "../entities"
-
 export enum APIStatus {IDLE, PENDING, REJECTED, FULFILLED};
 
 export interface APIError<DataType = any> {

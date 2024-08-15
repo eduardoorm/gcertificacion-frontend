@@ -174,7 +174,6 @@ export default function ViewEmpresaDefault(){
     }
 
     const handleClickBarCapacitacion = (params: any) => {
-        console.log(params);
         setAreaCapacitacionSelected(params.name);
         setOptionsGaugeCapacitacion({
             ...InitialGaugeOptions,
@@ -186,7 +185,6 @@ export default function ViewEmpresaDefault(){
     }
 
     const handleClickBarDocumentacion = (params: any) => {
-        console.log(params);
         setAreaDocumentacionSelected(params.name);
         setSerieDocumentacionSelected(params.seriesName);
         setOptionsGaugeDocumentacion({

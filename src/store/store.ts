@@ -56,7 +56,6 @@ const rootReducer: Reducer = (state: ReturnType<typeof appReducer>, action: AnyA
     if (action.type === 'USER_LOGOUT') {
         return appReducer(initialState, action);
     }
-
     return appReducer(state, action);
 };
 

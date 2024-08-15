@@ -1,0 +1,71 @@
+.cardDownloadFiles{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100px;
+    width: 400px;
+
+}
+
+.gridFiles{
+  width: 30%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-width: 200px;
+  width: 350px;
+  margin: 3px;
+}
+
+.cardDowloandFilesContent{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+  @media screen and (max-width: 599px) {
+    /* Estilos para dispositivos pequeños */
+    .react-player {
+        width:100% !important;
+        height: auto;
+      }
+  
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    /* Estilos para dispositivos medianos */
+    .react-player {
+        width:100% !important;
+        height: auto;
+      }
+
+  }
+
+  @media (min-width: 600px) and (max-width: 959px) and (orientation: portrait) {
+      /* Estilos para dispositivos medianos en modo vertical */
+
+}
+
+@media (min-width: 960px) {
+     /* Estilos para dispositivos grandes */
+     .react-player {
+        width:640px;
+        height: 360px;
+      }
+      
+}
+
+@media (min-width: 1200px) {
+    /* Estilos para pantallas muy grandes */
+
+
+}
