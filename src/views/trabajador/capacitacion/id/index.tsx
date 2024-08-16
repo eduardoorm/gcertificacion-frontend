@@ -377,10 +377,9 @@ export default function ViewTrabajadorCapacitacion() {
                                         {clase.archivos && clase.archivos.filter(item => item.tipo === TIPO_ARCHIVO.DOCUMENTO).length > 0 && (
                                             <>
                                                 <Grid container spacing={2}
-                                                    sx={{ mb: 5, flexWrap: "wrap", backgroundColor: "#E7EBF0", borderRadius: 1, display: 'flex', flexDirection: 'row' }}
+                                                    sx={{ mb: 5, flexWrap: "wrap", borderRadius: 1, display: 'flex', flexDirection: 'row' }}
                                                     justifyContent={"flex-start"} alignContent={"start"}>
                                                     {clase.archivos.filter((archivo) => archivo.tipo === TIPO_ARCHIVO.DOCUMENTO).map((archivo) => {
-                                                        console.log(archivo)
                                                         return (
                                                             <Grid item key={archivo.id} sx={{
                                                                 width: 'min-content',
@@ -398,7 +397,7 @@ export default function ViewTrabajadorCapacitacion() {
                                                                     height: '100%',
                                                                     width: '100%',
                                                                 }}>
-                                                                    <CardActionArea href={archivo.url}>
+                                                                    <CardActionArea sx={{ height: '100%' }} href={archivo.url}>
                                                                         <Box sx={{
                                                                             width: '100%',
                                                                             height: 'min-content',
